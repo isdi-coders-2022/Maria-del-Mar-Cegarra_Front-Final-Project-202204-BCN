@@ -1,7 +1,12 @@
 import "./App.css";
+import RegisterForm from "./components/RegisterForm/RegisterForm";
 
 function App() {
-  return <p>hola</p>;
+  return (
+    <p>
+      <RegisterForm />
+    </p>
+  );
 }
 
 export default App;

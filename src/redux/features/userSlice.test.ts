@@ -6,6 +6,27 @@ import userSlice, {
 } from "./userSlice";
 
 describe("Given the userSlice function", () => {
+  describe("When it receives an unknown action", () => {
+    test("Then it should return the initialState", () => {
+      const expectedState = {
+        name: "Pepe",
+        username: "pepe34",
+        email: "pepe@gmail",
+        avatar: "qouigbqg.jpg",
+        followers: 5,
+        following: 6,
+        logged: true,
+      };
+      const initialState = { ...expectedState };
+
+      const currentState = userSlice(initialState, {
+        type: "user/unknown",
+        payload: "",
+      });
+
+      expect(currentState).toEqual(expectedState);
+    });
+  });
   describe("When it receives a logInActionCreator with a user on its payload", () => {
     test("Then it should return the user given with logged: true", () => {
       const initialState = {

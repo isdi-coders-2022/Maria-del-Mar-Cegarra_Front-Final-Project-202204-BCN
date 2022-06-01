@@ -1,15 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UserState } from "../../types/UserTypes";
 import { RootState } from "../store/store";
-
-export interface UserState {
-  name: String;
-  username: String;
-  email: String;
-  avatar: String;
-  followers: Number;
-  following: Number;
-  logged: boolean;
-}
 
 const initialState: UserState = {
   name: "",

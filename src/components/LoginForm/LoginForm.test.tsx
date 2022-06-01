@@ -5,7 +5,7 @@ import { store } from "../../redux/store/store";
 import LoginForm from "./LoginForm";
 
 describe("Given the RegisterForm component", () => {
-  const expectedLabels: string[] = ["Username", "Password"];
+  const expectedLabels: string[] = ["Enter username", "Enter password"];
   describe("When its invoked", () => {
     test("Then it should render 5 labels with accessible names: name, username, email, password, repeat password and a REGISTER submit", () => {
       render(
@@ -23,8 +23,8 @@ describe("Given the RegisterForm component", () => {
       });
     });
 
-    test("Then it should render a submit with accessible name 'REGISTER'", () => {
-      const expectedSubmit: string = "LOGIN";
+    test("Then it should render a submit with accessible name 'Sign in'", () => {
+      const expectedSubmit: string = "Sign in";
 
       render(
         <Provider store={store}>
@@ -60,7 +60,7 @@ describe("Given the RegisterForm component", () => {
   describe("When the user clicks on submit", () => {
     test("Then the value of the inputs should be ''", () => {
       const expectedInputValue: string = "";
-      const expectedSubmit: string = "LOGIN";
+      const expectedSubmit: string = "Sign in";
 
       render(
         <Provider store={store}>

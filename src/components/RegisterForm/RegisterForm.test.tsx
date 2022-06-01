@@ -6,10 +6,10 @@ import RegisterForm from "./RegisterForm";
 
 describe("Given the RegisterForm component", () => {
   const expectedLabels: string[] = [
-    "Name",
-    "Username",
-    "Email",
-    "Password",
+    "Enter your name",
+    "Create username",
+    "Enter your email",
+    "Create password",
     "Repeat password",
   ];
   describe("When its invoked", () => {
@@ -28,8 +28,8 @@ describe("Given the RegisterForm component", () => {
       });
     });
 
-    test("Then it should render a submit with accessible name 'REGISTER'", () => {
-      const expectedSubmit: string = "REGISTER";
+    test("Then it should render a submit with accessible name 'Sign up'", () => {
+      const expectedSubmit: string = "Sign up";
 
       render(
         <Provider store={store}>
@@ -65,7 +65,7 @@ describe("Given the RegisterForm component", () => {
   describe("When the user clicks on submit", () => {
     test("Then the value of the inputs should be ''", () => {
       const expectedInputValue: string = "";
-      const expectedSubmit: string = "REGISTER";
+      const expectedSubmit: string = "Sign up";
 
       render(
         <Provider store={store}>

@@ -14,8 +14,10 @@
     "@types/react-redux": "^7.1.24",
     "axios": "^0.27.2",
     "jwt-decode": "^3.1.2",
+    "msw": "^0.42.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-redux": "^8.0.2",
     "react-scripts": "5.0.1",
     "typescript": "^4.7.2",
     "web-vitals": "^2.1.4"
@@ -47,17 +49,21 @@
     ]
   },
   "devDependencies": {
-    "husky": "^8.0.0"
+    "autoprefixer": "^10.4.7",
+    "husky": "^8.0.0",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.0.24"
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.ts",
-      "src/**/*.tsx",
-      "!src/**/*.test.ts",
-      "!src/**/*.test.tsx",
       "!src/index.tsx",
       "!src/reportWebVitals.ts",
-      "!src/setupTests.ts"
+      "!src/setupTests.tsx",
+      "!.eslintrc.tsx",
+      "!coverage/*/.tsx",
+      "!src/**/*.test.tsx",
+      "!src/**/*.test.tsx.snap",
+      "!src/react-app-env.d.ts"
     ]
   }
 }

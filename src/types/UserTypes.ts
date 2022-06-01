@@ -41,3 +41,10 @@ export interface LoginFormData {
   username: string;
   password: string;
 }
+
+export interface Label {
+  id: string;
+  type: string;
+  text: string;
+  icon: JSX.Element;
+}

@@ -19,7 +19,6 @@ export const userSlice = createSlice({
     logOut: (user) => ({ ...initialState }),
     editUser: (user, action: PayloadAction<UserState>) => ({
       ...action.payload,
-      id: user.id,
     }),
   },
 });

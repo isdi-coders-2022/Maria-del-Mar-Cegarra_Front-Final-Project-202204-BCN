@@ -8,14 +8,13 @@ const apiUrl = process.env.REACT_APP_API_URL;
 
 export const registerUserThunk =
   (formData: RegisterFormData) => async (dispatch: AppDispatch) => {
-    const { name, username, email, password } = formData;
-    const { status, data } = await axios.post(`${apiUrl}/user/register`, {
+    const { name, username, password } = formData;
+    const { data } = await axios.post(`${apiUrl}user/register`, {
       name,
       username,
-      email,
       password,
     });
-    if (status === 200) {
+    if (data) {
       const userInfo: UserState = { ...jwtDecode(data.token), logged: true };
       localStorage.setItem("token", data.token);
       dispatch(loginActionCreator(userInfo));

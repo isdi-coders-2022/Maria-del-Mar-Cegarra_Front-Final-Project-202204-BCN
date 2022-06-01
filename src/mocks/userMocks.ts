@@ -1,14 +1,39 @@
-import { UserData, UserState } from "../types/UserTypes";
+import {
+  RegisterFormData,
+  TokenUserData,
+  UserData,
+  UserState,
+} from "../types/UserTypes";
 
-export const userMock: UserState = {
+export const mockTokenUserData: TokenUserData = {
+  name: "Maria",
+  username: "maria23",
+  id: 0,
+};
+
+export const mockUserStateLogged: UserState = {
   name: "Maria",
   username: "maria23",
   id: 0,
   logged: true,
 };
 
-export const usersMock: UserData[] = [
+export const mockUserStateUnLogged: UserState = {
+  ...mockUserStateLogged,
+  logged: false,
+};
+
+export const mockRegisterFormData: RegisterFormData = {
+  name: "Maria",
+  username: "maria23",
+  email: "uwu@gmail.com",
+  password: "122343",
+  repeatPassword: "122343",
+};
+
+export const mockUsersData: UserData[] = [
   {
+    id: 3,
     name: "Maicol",
     username: "maicol69",
     email: "maicol@gmail.com",
@@ -18,6 +43,7 @@ export const usersMock: UserData[] = [
     logged: false,
   },
   {
+    id: 4,
     name: "Albert",
     username: "albert 68",
     email: "albert@gmail.com",

@@ -1,4 +1,7 @@
-import { userMock } from "../../mocks/userMocks";
+import {
+  mockUserStateLogged,
+  mockUserStateUnLogged,
+} from "../../mocks/userMocks";
 import { UserState } from "../../types/UserTypes";
 import userSlice, {
   editUserActionCreator,
@@ -33,11 +36,11 @@ describe("Given the userSlice function", () => {
         id: 0,
         logged: false,
       };
-      const expectedState = { ...userMock };
+      const expectedState: UserState = { ...mockUserStateLogged };
 
       const currentState = userSlice(
         initialState,
-        loginActionCreator(userMock)
+        loginActionCreator(mockUserStateLogged)
       );
 
       expect(currentState).toEqual(expectedState);
@@ -52,7 +55,7 @@ describe("Given the userSlice function", () => {
         id: 0,
         logged: false,
       };
-      const initialState = { ...userMock };
+      const initialState = { ...mockUserStateLogged };
 
       const currentState = userSlice(initialState, logOutActionCreator());
 
@@ -71,10 +74,10 @@ describe("Given the userSlice function", () => {
       const newUserData = {
         name: "Pepe",
         username: "pepe34",
-        id: 1230847,
+        id: 0,
         logged: true,
       };
-      const initialState = { ...userMock };
+      const initialState = { ...mockUserStateUnLogged };
 
       const currentState = userSlice(
         initialState,

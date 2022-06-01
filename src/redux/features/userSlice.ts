@@ -5,10 +5,7 @@ import { RootState } from "../store/store";
 const initialState: UserState = {
   name: "",
   username: "",
-  email: "",
-  avatar: "",
-  followers: 0,
-  following: 0,
+  id: 0,
   logged: false,
 };
 
@@ -18,11 +15,11 @@ export const userSlice = createSlice({
   reducers: {
     logIn: (user, action: PayloadAction<UserState>) => ({
       ...action.payload,
-      logged: true,
     }),
-    logOut: (user) => initialState,
+    logOut: (user) => ({ ...initialState }),
     editUser: (user, action: PayloadAction<UserState>) => ({
       ...action.payload,
+      id: user.id,
     }),
   },
 });

@@ -1,4 +1,5 @@
 import { userMock } from "../../mocks/userMocks";
+import { UserState } from "../../types/UserTypes";
 import userSlice, {
   editUserActionCreator,
   loginActionCreator,
@@ -8,13 +9,10 @@ import userSlice, {
 describe("Given the userSlice function", () => {
   describe("When it receives an unknown action", () => {
     test("Then it should return the initialState", () => {
-      const expectedState = {
+      const expectedState: UserState = {
         name: "Pepe",
         username: "pepe34",
-        email: "pepe@gmail",
-        avatar: "qouigbqg.jpg",
-        followers: 5,
-        following: 6,
+        id: 342,
         logged: true,
       };
       const initialState = { ...expectedState };
@@ -32,13 +30,10 @@ describe("Given the userSlice function", () => {
       const initialState = {
         name: "",
         username: "",
-        email: "",
-        avatar: "",
-        followers: 0,
-        following: 0,
+        id: 0,
         logged: false,
       };
-      const expectedState = { ...userMock, logged: true };
+      const expectedState = { ...userMock };
 
       const currentState = userSlice(
         initialState,
@@ -54,13 +49,10 @@ describe("Given the userSlice function", () => {
       const expectedState = {
         name: "",
         username: "",
-        email: "",
-        avatar: "",
-        followers: 0,
-        following: 0,
+        id: 0,
         logged: false,
       };
-      const initialState = { ...userMock, logged: true };
+      const initialState = { ...userMock };
 
       const currentState = userSlice(initialState, logOutActionCreator());
 
@@ -73,17 +65,20 @@ describe("Given the userSlice function", () => {
       const expectedState = {
         name: "Pepe",
         username: "pepe34",
-        email: "pepe@gmail",
-        avatar: "qouigbqg.jpg",
-        followers: 5,
-        following: 6,
+        id: 0,
+        logged: true,
+      };
+      const newUserData = {
+        name: "Pepe",
+        username: "pepe34",
+        id: 1230847,
         logged: true,
       };
       const initialState = { ...userMock };
 
       const currentState = userSlice(
         initialState,
-        editUserActionCreator(expectedState)
+        editUserActionCreator(newUserData)
       );
 
       expect(currentState).toEqual(expectedState);

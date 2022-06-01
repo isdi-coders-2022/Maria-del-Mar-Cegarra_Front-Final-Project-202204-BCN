@@ -1,24 +1,13 @@
-interface UserMock {
-  name: String;
-  username: String;
-  email: String;
-  avatar: String;
-  followers: Number;
-  following: Number;
-  logged: boolean;
-}
+import { UserData, UserState } from "../types/UserTypes";
 
-export const userMock: UserMock = {
+export const userMock: UserState = {
   name: "Maria",
   username: "maria23",
-  email: "maria@gmail.com",
-  avatar: "qrigbqr.jpg",
-  followers: 4,
-  following: 5,
-  logged: false,
+  id: 0,
+  logged: true,
 };
 
-export const usersMock: UserMock[] = [
+export const usersMock: UserData[] = [
   {
     name: "Maicol",
     username: "maicol69",

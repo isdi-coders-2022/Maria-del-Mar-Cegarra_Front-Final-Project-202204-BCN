@@ -1,14 +1,7 @@
-import { SyntheticEvent, useState } from "react";
+import { useState } from "react";
+import { RegisterFormData } from "../../types/UserTypes";
 
-interface FormData {
-  name: string;
-  username: string;
-  email: string;
-  password: string;
-  repeatPassword: string;
-}
-
-const blankForm: FormData = {
+const blankForm: RegisterFormData = {
   name: "",
   username: "",
   email: "",
@@ -17,7 +10,7 @@ const blankForm: FormData = {
 };
 
 const RegisterForm = (): JSX.Element => {
-  const [formData, setFormData] = useState<FormData>(blankForm);
+  const [formData, setFormData] = useState<RegisterFormData>(blankForm);
 
   const changeFormData = (event: {
     target: { id: string; value: string };

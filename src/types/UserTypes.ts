@@ -1,3 +1,9 @@
+export interface TokenUserData {
+  name: string;
+  username: string;
+  id: number;
+}
+
 export interface UserState {
   name: string;
   username: string;
@@ -5,7 +11,15 @@ export interface UserState {
   logged: boolean;
 }
 
+export interface AxiosReturn {
+  status: Number;
+  data: {
+    token: string;
+  };
+}
+
 export interface UserData {
+  id: number;
   name: string;
   username: string;
   email: string;

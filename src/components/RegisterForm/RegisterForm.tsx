@@ -1,4 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { useAppDispatch } from "../../redux/hooks/hooks";
+import { registerUserThunk } from "../../thunks/userThunks";
 import { RegisterFormData } from "../../types/UserTypes";
 
 const blankForm: RegisterFormData = {
@@ -11,6 +13,7 @@ const blankForm: RegisterFormData = {
 
 const RegisterForm = (): JSX.Element => {
   const [formData, setFormData] = useState<RegisterFormData>(blankForm);
+  const dispatch = useAppDispatch();
 
   const changeFormData = (event: {
     target: { id: string; value: string };
@@ -18,9 +21,15 @@ const RegisterForm = (): JSX.Element => {
     setFormData({ ...formData, [event.target.id]: event.target.value });
   };
 
+  const submitFormData = async (event: React.SyntheticEvent) => {
+    event.preventDefault();
+    await dispatch(registerUserThunk(formData));
+    setFormData(blankForm);
+  };
+
   return (
     <>
-      <form>
+      <form onSubmit={submitFormData} noValidate autoComplete="off">
         <label htmlFor="name">Name</label>
         <input
           type="text"
@@ -56,7 +65,7 @@ const RegisterForm = (): JSX.Element => {
           placeholder="Repeat password..."
           onChange={changeFormData}
         />
-        <input type="submit" value="REGISTER" />
+        <input type="submit" value="REGISTER" onSubmit={submitFormData} />
       </form>
     </>
   );

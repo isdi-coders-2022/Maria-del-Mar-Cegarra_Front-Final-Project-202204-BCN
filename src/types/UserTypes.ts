@@ -36,3 +36,8 @@ export interface RegisterFormData {
   password: string;
   repeatPassword: string;
 }
+
+export interface LoginFormData {
+  username: string;
+  password: string;
+}

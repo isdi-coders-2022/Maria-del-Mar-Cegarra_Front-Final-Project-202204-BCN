@@ -79,9 +79,9 @@ const RegisterForm = (): JSX.Element => {
           autoComplete="off"
           noValidate
         >
-          <p className="text-2xl font-bold text-left text-indigo-600 sm:text-3xl">
+          <h1 className="text-2xl font-bold text-left text-indigo-600 sm:text-3xl">
             Register
-          </p>
+          </h1>
           {labels.map((label) => (
             <div>
               <label

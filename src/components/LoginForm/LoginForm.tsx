@@ -19,7 +19,7 @@ const LoginForm = (): JSX.Element => {
       id: "username",
       type: "text",
       text: "Enter username",
-      icon: <UserIcon />,
+      icon: <UserIcon color="text-gray-400" />,
     },
     {
       id: "password",

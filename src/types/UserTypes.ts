@@ -30,7 +30,7 @@ export interface UserData {
 }
 
 export interface RegisterFormData {
-  name: string;
+  [name: string]: string;
   username: string;
   email: string;
   password: string;

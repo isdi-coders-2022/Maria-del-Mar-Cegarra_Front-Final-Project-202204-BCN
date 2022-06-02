@@ -42,6 +42,19 @@ describe("Given the RegisterForm component", () => {
     });
   });
 
+  test("Then it should render an SVG image", () => {
+    const expectedNumberSVG = 5;
+
+    render(
+      <Provider store={store}>
+        <RegisterForm />
+      </Provider>
+    );
+    const svgs = screen.getAllByRole("img");
+
+    expect(svgs).toHaveLength(expectedNumberSVG);
+  });
+
   describe("When the user types 'asdfg' on the inputs", () => {
     test("Then the value of the inpust shoould be 'asdfg'", () => {
       const expectedInputValue: string = "asdfg";
@@ -63,7 +76,7 @@ describe("Given the RegisterForm component", () => {
   });
 
   describe("When the user clicks on submit", () => {
-    test("Then the value of the inputs should be ''", () => {
+    test("Then the value of the inputs should be '' because of formData is set to blank fields", () => {
       const expectedInputValue: string = "";
       const expectedSubmit: string = "Sign up";
 

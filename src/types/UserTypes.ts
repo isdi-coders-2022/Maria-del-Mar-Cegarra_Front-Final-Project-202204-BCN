@@ -12,7 +12,7 @@ export interface UserState {
 }
 
 export interface AxiosReturn {
-  status: Number;
+  status: number;
   data: {
     token: string;
   };

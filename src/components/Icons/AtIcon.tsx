@@ -1,6 +1,7 @@
 const AtIcon = (): JSX.Element => {
   return (
     <svg
+      role="img"
       xmlns="http://www.w3.org/2000/svg"
       className="w-5 h-5 text-gray-400"
       fill="none"

@@ -37,6 +37,19 @@ describe("Given the RegisterForm component", () => {
     });
   });
 
+  test("Then it should render an SVG image", () => {
+    const expectedNumberSVG = 2;
+
+    render(
+      <Provider store={store}>
+        <LoginForm />
+      </Provider>
+    );
+    const svgs = screen.getAllByRole("img");
+
+    expect(svgs).toHaveLength(expectedNumberSVG);
+  });
+
   describe("When the user types 'asdfg' on the inputs", () => {
     test("Then the value of the inputs shoould be 'asdfg'", () => {
       const expectedInputValue: string = "asdfg";

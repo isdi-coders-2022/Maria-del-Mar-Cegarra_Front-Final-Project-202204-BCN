@@ -99,6 +99,7 @@ const RegisterForm = (): JSX.Element => {
                   className="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
                   placeholder={label.text}
                   onChange={changeFormData}
+                  value={formData[label.id]}
                 />
 
                 <span className="absolute inset-y-0 inline-flex items-center right-4">
@@ -117,7 +118,7 @@ const RegisterForm = (): JSX.Element => {
           ))}
           <button
             type="submit"
-            onSubmit={submitFormData}
+            onClick={submitFormData}
             className="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg"
           >
             Sign up

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAppDispatch } from "../../redux/hooks/hooks";
-import { loginUserThunk } from "../../thunks/userThunks";
+import { loginUserThunk } from "../../redux/thunks/userThunks";
 import { Label, LoginFormData } from "../../types/UserTypes";
 import EyeIcon from "../Icons/EyeIcon";
 import UserIcon from "../Icons/UserIcon";
@@ -48,6 +48,8 @@ const LoginForm = (): JSX.Element => {
           action="register"
           onSubmit={submitFormData}
           className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl"
+          autoComplete="off"
+          noValidate
         >
           <p className="text-2xl font-bold text-left text-indigo-600 sm:text-3xl">
             Log in

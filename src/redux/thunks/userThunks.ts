@@ -1,8 +1,12 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import { loginActionCreator } from "../redux/features/userSlice";
-import { AppDispatch } from "../redux/store/store";
-import { LoginFormData, RegisterFormData, UserState } from "../types/UserTypes";
+import { AppDispatch } from "../store/store";
+import {
+  LoginFormData,
+  RegisterFormData,
+  UserState,
+} from "../../types/UserTypes";
+import { loginActionCreator } from "../features/userSlice";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 

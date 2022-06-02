@@ -1,12 +1,13 @@
 import axios from "axios";
+
+import { AxiosReturn } from "../../types/UserTypes";
+import { loginUserThunk, registerUserThunk } from "./userThunks";
 import {
   mockRegisterFormData,
   mockTokenUserData,
   mockUserStateLogged,
-} from "../mocks/userMocks";
-import { loginActionCreator } from "../redux/features/userSlice";
-import { AxiosReturn } from "../types/UserTypes";
-import { loginUserThunk, registerUserThunk } from "./userThunks";
+} from "../../mocks/userMocks";
+import { loginActionCreator } from "../features/userSlice";
 
 jest.mock("jwt-decode", () => () => mockTokenUserData);
 

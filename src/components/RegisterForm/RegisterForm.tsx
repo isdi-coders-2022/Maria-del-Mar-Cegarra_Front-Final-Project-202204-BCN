@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../../redux/hooks/hooks";
-import { registerUserThunk } from "../../thunks/userThunks";
+import { registerUserThunk } from "../../redux/thunks/userThunks";
 import { Label, RegisterFormData } from "../../types/UserTypes";
 import AtIcon from "../Icons/AtIcon";
 import CheckIcon from "../Icons/CheckIcon";
@@ -76,6 +76,8 @@ const RegisterForm = (): JSX.Element => {
           action="register"
           onSubmit={submitFormData}
           className="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl"
+          autoComplete="off"
+          noValidate
         >
           <p className="text-2xl font-bold text-left text-indigo-600 sm:text-3xl">
             Register

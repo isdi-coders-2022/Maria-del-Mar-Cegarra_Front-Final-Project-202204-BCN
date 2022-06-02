@@ -57,10 +57,7 @@ const Navigation = (): JSX.Element => {
                       {navlink.text}
                     </span>
 
-                    <span
-                      className="h-2 w-2 rounded-full group-hover:bg-cyan-400
-									transition-all duration-150 delay-100"
-                    ></span>
+                    <span className="h-2 w-2 rounded-full group-hover:bg-cyan transition-all duration-150 delay-100"></span>
                   </span>
                 </a>
               </li>

@@ -69,6 +69,17 @@ const RegisterForm = (): JSX.Element => {
       ? formData.password === formData.repeatPassword
       : false;
 
+  const renderIcon = (label: Label): JSX.Element =>
+    label.id === "repeatPassword" ? (
+      checkPassword() ? (
+        <CheckIcon />
+      ) : (
+        <CrossIcon />
+      )
+    ) : (
+      label.icon
+    );
+
   return (
     <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
       <div className="max-w-lg mx-auto">
@@ -103,15 +114,7 @@ const RegisterForm = (): JSX.Element => {
                 />
 
                 <span className="absolute inset-y-0 inline-flex items-center right-4">
-                  {label.id === "repeatPassword" ? (
-                    checkPassword() ? (
-                      <CheckIcon />
-                    ) : (
-                      <CrossIcon />
-                    )
-                  ) : (
-                    label.icon
-                  )}
+                  {renderIcon(label)}
                 </span>
               </div>
             </div>

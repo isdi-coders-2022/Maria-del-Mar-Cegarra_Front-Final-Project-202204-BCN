@@ -24,13 +24,13 @@ const RegisterForm = (): JSX.Element => {
       id: "name",
       type: "text",
       text: "Enter your name",
-      icon: <UserIcon />,
+      icon: <UserIcon color="text-gray-400" />,
     },
     {
       id: "username",
       type: "text",
       text: "Create username",
-      icon: <UserIcon />,
+      icon: <UserIcon color="text-gray-400" />,
     },
     {
       id: "email",

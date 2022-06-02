@@ -89,7 +89,7 @@ const LoginForm = (): JSX.Element => {
 
           <p className="text-sm text-center text-gray-500">
             No account?
-            <a className="underline" href="/login">
+            <a className="underline" href="/register">
               Sign up
             </a>
           </p>

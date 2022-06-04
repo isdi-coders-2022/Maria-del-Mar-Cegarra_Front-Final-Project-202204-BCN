@@ -1,4 +1,5 @@
 export interface IPost {
+  id?: string;
   picure: string;
   caption: string;
   date: string;

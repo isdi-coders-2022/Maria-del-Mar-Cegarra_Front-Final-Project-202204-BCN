@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IPost } from "../../types/PostTypes";
 import { RootState } from "../store/store";
 
-interface PostState {
+export interface PostState {
   publicPosts: IPost[];
   userPosts: IPost[];
   detailPost: IPost | {};

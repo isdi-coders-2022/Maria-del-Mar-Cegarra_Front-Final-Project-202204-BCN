@@ -8,13 +8,13 @@ import {
 export const mockTokenUserData: TokenUserData = {
   name: "Maria",
   username: "maria23",
-  id: 0,
+  id: "0",
 };
 
 export const mockUserStateLogged: UserState = {
   name: "Maria",
   username: "maria23",
-  id: 0,
+  id: "0",
   logged: true,
 };
 
@@ -33,7 +33,7 @@ export const mockRegisterFormData: RegisterFormData = {
 
 export const mockUsersData: UserData[] = [
   {
-    id: 3,
+    id: "3",
     name: "Maicol",
     username: "maicol69",
     email: "maicol@gmail.com",
@@ -43,7 +43,7 @@ export const mockUsersData: UserData[] = [
     logged: false,
   },
   {
-    id: 4,
+    id: "4",
     name: "Albert",
     username: "albert 68",
     email: "albert@gmail.com",

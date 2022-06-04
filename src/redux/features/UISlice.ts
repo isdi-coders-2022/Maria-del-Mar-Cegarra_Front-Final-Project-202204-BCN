@@ -3,13 +3,13 @@ import { RootState } from "../store/store";
 
 type Error = "" | "error" | "advise" | "confirmation" | "loading";
 
-interface UISlice {
+export interface UIState {
   type: Error;
   header: string;
   body: string;
 }
 
-const initialUI: UISlice = {
+const initialUI: UIState = {
   type: "",
   header: "",
   body: "",

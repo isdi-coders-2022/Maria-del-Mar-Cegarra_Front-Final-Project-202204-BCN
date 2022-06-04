@@ -1,13 +1,13 @@
 export interface TokenUserData {
   name: string;
   username: string;
-  id: number;
+  id: string;
 }
 
 export interface UserState {
   name: string;
   username: string;
-  id: number;
+  id: string;
   logged: boolean;
 }
 
@@ -19,7 +19,7 @@ export interface AxiosReturn {
 }
 
 export interface UserData {
-  id: number;
+  id: string;
   name: string;
   username: string;
   email: string;

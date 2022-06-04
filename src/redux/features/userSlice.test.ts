@@ -3,10 +3,12 @@ import {
   mockUserStateUnLogged,
 } from "../../mocks/userMocks";
 import { UserState } from "../../types/UserTypes";
+import { RootState } from "../store/store";
 import userSlice, {
   editUserActionCreator,
   loginActionCreator,
   logOutActionCreator,
+  selectUser,
 } from "./userSlice";
 
 describe("Given the userSlice function", () => {
@@ -15,7 +17,7 @@ describe("Given the userSlice function", () => {
       const expectedState: UserState = {
         name: "Pepe",
         username: "pepe34",
-        id: 342,
+        id: "342",
         logged: true,
       };
       const initialState = { ...expectedState };
@@ -33,7 +35,7 @@ describe("Given the userSlice function", () => {
       const initialState = {
         name: "",
         username: "",
-        id: 0,
+        id: "",
         logged: false,
       };
       const expectedState: UserState = { ...mockUserStateLogged };
@@ -52,7 +54,7 @@ describe("Given the userSlice function", () => {
       const expectedState = {
         name: "",
         username: "",
-        id: 0,
+        id: "",
         logged: false,
       };
       const initialState = { ...mockUserStateLogged };
@@ -68,13 +70,13 @@ describe("Given the userSlice function", () => {
       const expectedState = {
         name: "Pepe",
         username: "pepe34",
-        id: 0,
+        id: "",
         logged: true,
       };
       const newUserData = {
         name: "Pepe",
         username: "pepe34",
-        id: 0,
+        id: "",
         logged: true,
       };
       const initialState = { ...mockUserStateUnLogged };
@@ -85,6 +87,35 @@ describe("Given the userSlice function", () => {
       );
 
       expect(currentState).toEqual(expectedState);
+    });
+  });
+});
+
+describe("Given the selectPost function", () => {
+  describe("When it receives the state of the store with a posts state", () => {
+    test("Then it should return the posts state", () => {
+      const state: RootState = {
+        posts: {
+          publicPosts: [],
+          userPosts: [],
+          detailPost: {},
+        },
+        user: {
+          name: "",
+          username: "",
+          id: "",
+          logged: true,
+        },
+        ui: {
+          type: "",
+          body: "",
+          header: "",
+        },
+      };
+
+      const userState = selectUser(state);
+
+      expect(userState).toEqual(state.user);
     });
   });
 });

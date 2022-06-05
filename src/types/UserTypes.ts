@@ -11,11 +11,11 @@ export interface UserState {
   logged: boolean;
 }
 
-export interface AxiosReturn {
+export interface AxiosUserReturn {
   status: number;
-  data: {
+  data?: {
     token: string;
-  };
+  } | null;
 }
 
 export interface UserData {

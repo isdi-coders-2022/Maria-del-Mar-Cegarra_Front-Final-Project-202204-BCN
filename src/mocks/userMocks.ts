@@ -1,4 +1,5 @@
 import {
+  LoginFormData,
   RegisterFormData,
   TokenUserData,
   UserData,
@@ -29,6 +30,19 @@ export const mockRegisterFormData: RegisterFormData = {
   email: "uwu@gmail.com",
   password: "122343",
   repeatPassword: "122343",
+};
+
+export const mockWrongUserDataRegister: RegisterFormData = {
+  name: "",
+  username: "",
+  email: "",
+  password: "",
+  repeatPassword: "",
+};
+
+export const wrongUserDataLogin: LoginFormData = {
+  username: "",
+  password: "",
 };
 
 export const mockUsersData: UserData[] = [

@@ -14,7 +14,7 @@ const initialState: PostState = {
   detailPost: {},
 };
 
-type Posts = IPost[];
+type Posts = IPost[] | [];
 
 export const postSlice = createSlice({
   name: "posts",

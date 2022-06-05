@@ -7,3 +7,10 @@ export interface IPost {
   comments?: number;
   hashtags: string[];
 }
+
+export interface AxiosPostsReturn {
+  status: number;
+  data?: {
+    posts: IPost[];
+  } | null;
+}

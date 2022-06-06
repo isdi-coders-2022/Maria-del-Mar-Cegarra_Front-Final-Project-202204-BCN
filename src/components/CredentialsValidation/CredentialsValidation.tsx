@@ -2,7 +2,7 @@ import jwtDecode from "jwt-decode";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginActionCreator } from "../../redux/features/userSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
+import { useAppDispatch } from "../../redux/hooks/hooks";
 import { UserData } from "../../types/UserTypes";
 
 interface Props {
@@ -17,7 +17,6 @@ const CredentialsValidation = ({ children }: Props) => {
   useEffect((): any => {
     if (!token) {
       navigate("/login");
-      return null;
     }
     if (token) {
       const userData: UserData = jwtDecode(token as string);

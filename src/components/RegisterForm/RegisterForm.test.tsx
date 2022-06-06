@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import { store } from "../../redux/store/store";
 import RegisterForm from "./RegisterForm";
 
@@ -15,9 +16,11 @@ describe("Given the RegisterForm component", () => {
   describe("When its invoked", () => {
     test("Then it should render 5 labels with accessible names: name, username, email, password, repeat password and a REGISTER submit", () => {
       render(
-        <Provider store={store}>
-          <RegisterForm />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <RegisterForm />
+          </Provider>
+        </BrowserRouter>
       );
       const allInputs = expectedLabels.map((expectedLabel) =>
         screen.getByLabelText(expectedLabel, { selector: "input" })
@@ -32,9 +35,11 @@ describe("Given the RegisterForm component", () => {
       const expectedSubmit: string = "Sign up";
 
       render(
-        <Provider store={store}>
-          <RegisterForm />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <RegisterForm />
+          </Provider>
+        </BrowserRouter>
       );
       const submit = screen.getByRole("button", { name: expectedSubmit });
 
@@ -46,9 +51,11 @@ describe("Given the RegisterForm component", () => {
     const expectedNumberSVG = 5;
 
     render(
-      <Provider store={store}>
-        <RegisterForm />
-      </Provider>
+      <BrowserRouter>
+        <Provider store={store}>
+          <RegisterForm />
+        </Provider>
+      </BrowserRouter>
     );
     const svgs = screen.getAllByRole("img");
 
@@ -60,9 +67,11 @@ describe("Given the RegisterForm component", () => {
       const expectedInputValue: string = "asdfg";
 
       render(
-        <Provider store={store}>
-          <RegisterForm />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <RegisterForm />
+          </Provider>
+        </BrowserRouter>
       );
       const allInputs = expectedLabels.map((expectedLabel) =>
         screen.getByLabelText(expectedLabel, { selector: "input" })
@@ -81,9 +90,11 @@ describe("Given the RegisterForm component", () => {
       const expectedSubmit: string = "Sign up";
 
       render(
-        <Provider store={store}>
-          <RegisterForm />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <RegisterForm />
+          </Provider>
+        </BrowserRouter>
       );
       const allInputs = expectedLabels.map((expectedLabel) =>
         screen.getByLabelText(expectedLabel, { selector: "input" })

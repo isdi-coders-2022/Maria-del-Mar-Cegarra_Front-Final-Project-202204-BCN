@@ -1,6 +1,6 @@
 export interface IPost {
   id?: string;
-  picure: string;
+  picture: string;
   caption: string;
   date: string;
   likes?: number;

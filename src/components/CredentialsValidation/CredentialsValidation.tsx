@@ -1,8 +1,9 @@
 import jwtDecode from "jwt-decode";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginActionCreator } from "../../redux/features/userSlice";
-import { useAppDispatch } from "../../redux/hooks/hooks";
+import { loginActionCreator, selectUser } from "../../redux/features/userSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
+import { store } from "../../redux/store/store";
 import { UserData } from "../../types/UserTypes";
 
 interface Props {
@@ -10,26 +11,14 @@ interface Props {
 }
 
 const CredentialsValidation = ({ children }: Props) => {
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const { logged } = useAppSelector((state) => state.user);
 
   useEffect((): any => {
-    if (!token) {
+    if (!logged) {
       navigate("/login");
     }
-    if (token) {
-      const userData: UserData = jwtDecode(token as string);
-      dispatch(
-        loginActionCreator({
-          name: userData.name,
-          username: userData.username,
-          id: userData.id,
-          logged: true,
-        })
-      );
-    }
-  }, [dispatch, navigate, token]);
+  }, [navigate, logged]);
   return children;
 };
 

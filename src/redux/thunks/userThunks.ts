@@ -11,6 +11,11 @@ import { showAdviseThunk, showErrorThunk } from "./UIThunks";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
+interface UserData {
+  name: string;
+  username: string;
+  id: string;
+}
 export const showAdviseNoRegisterData = showAdviseThunk(
   "User data not provided",
   "Please fill all the fields and ty again"
@@ -67,7 +72,7 @@ export const registerUserThunk =
 export const loginUserThunk =
   (formData: LoginFormData) => async (dispatch: AppDispatch) => {
     const { username, password } = formData;
-    if (!(username || password)) {
+    if (!(username && password)) {
       dispatch(showAdviseLoginUser);
     }
     try {
@@ -79,8 +84,14 @@ export const loginUserThunk =
         dispatch(showAdviseWrongUsernamePaswword);
         return;
       }
-      const userInfo: UserState = { ...jwtDecode(data.token), logged: true };
       localStorage.setItem("token", data.token);
+      const userData: UserData = jwtDecode(data.token);
+      const userInfo: UserState = {
+        name: userData.name,
+        username: userData.username,
+        id: userData.id,
+        logged: true,
+      };
 
       dispatch(loginActionCreator(userInfo));
     } catch (error) {

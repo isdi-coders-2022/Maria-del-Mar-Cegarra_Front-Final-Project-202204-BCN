@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks/hooks";
 import { loginUserThunk } from "../../redux/thunks/userThunks";
 import { Label, LoginFormData } from "../../types/UserTypes";
@@ -12,6 +13,7 @@ const blankForm: LoginFormData = {
 
 const LoginForm = (): JSX.Element => {
   const [formData, setFormData] = useState<LoginFormData>(blankForm);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const labels: Label[] = [
@@ -39,6 +41,8 @@ const LoginForm = (): JSX.Element => {
     event.preventDefault();
     await dispatch(loginUserThunk(formData));
     setFormData(blankForm);
+
+    navigate("/home");
   };
 
   return (

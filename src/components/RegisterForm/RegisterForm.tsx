@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks/hooks";
 import { registerUserThunk } from "../../redux/thunks/userThunks";
 import { Label, RegisterFormData } from "../../types/UserTypes";
@@ -19,6 +20,7 @@ const blankForm: RegisterFormData = {
 const RegisterForm = (): JSX.Element => {
   const [formData, setFormData] = useState<RegisterFormData>(blankForm);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const labels: Label[] = [
     {
       id: "name",
@@ -62,6 +64,7 @@ const RegisterForm = (): JSX.Element => {
     event.preventDefault();
     await dispatch(registerUserThunk(formData));
     setFormData(blankForm);
+    navigate("/home");
   };
 
   const checkPassword = (): boolean =>

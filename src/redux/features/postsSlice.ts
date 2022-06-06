@@ -15,6 +15,7 @@ const initialState: PostState = {
 };
 
 type Posts = IPost[] | [];
+type Id = string | undefined;
 
 export const postSlice = createSlice({
   name: "posts",
@@ -24,11 +25,19 @@ export const postSlice = createSlice({
       ...posts,
       publicPosts: [...posts.publicPosts, ...action.payload],
     }),
+    deletePost: (posts, action: PayloadAction<Id>) => ({
+      ...posts,
+      publicPosts: posts.publicPosts.filter(
+        (post) => post.id !== action.payload
+      ),
+    }),
   },
 });
 
-export const { loadPublicPosts: loadPublicPostsActionCreator } =
-  postSlice.actions;
+export const {
+  loadPublicPosts: loadPublicPostsActionCreator,
+  deletePost: deletePostActionCreator,
+} = postSlice.actions;
 
 export const selectPost = (state: RootState) => state.posts;
 

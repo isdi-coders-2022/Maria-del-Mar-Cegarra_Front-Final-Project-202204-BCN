@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import { store } from "../../redux/store/store";
 import RegisterPage from "./RegisterPage";
 
@@ -9,9 +10,11 @@ describe("Given the LoginPage page component", () => {
       const expectedHeading = "Register";
 
       render(
-        <Provider store={store}>
-          <RegisterPage />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <RegisterPage />
+          </Provider>
+        </BrowserRouter>
       );
       const heading = screen.getByRole("heading", { name: expectedHeading });
 

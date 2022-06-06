@@ -55,7 +55,7 @@ const LoginForm = (): JSX.Element => {
             Log in
           </h1>
           {labels.map((label) => (
-            <div>
+            <div key={label.id}>
               <label
                 htmlFor={label.id}
                 hidden={true}

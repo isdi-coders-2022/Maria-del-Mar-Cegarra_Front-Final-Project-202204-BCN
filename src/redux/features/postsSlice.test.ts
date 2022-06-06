@@ -1,6 +1,7 @@
 import { mockPosts } from "../../mocks/postMocks";
 import { RootState } from "../store/store";
 import postsSlice, {
+  deletePostActionCreator,
   loadPublicPostsActionCreator,
   PostState,
   selectPost,
@@ -41,6 +42,31 @@ describe("Given the postsSlice function", () => {
       const currentState = postsSlice(
         initialState,
         loadPublicPostsActionCreator(expectedPublicPosts)
+      );
+
+      expect(currentState).toEqual(expectedState);
+    });
+  });
+
+  describe("When it receives a deletePostActionCreator with an id ''", () => {
+    test("Then it should return the initial state without the post with this id", () => {
+      const id = "2323";
+      const initialState: PostState = {
+        publicPosts: mockPosts,
+        userPosts: [],
+        detailPost: {},
+      };
+      const expectedPublicPosts = mockPosts.filter(
+        (mockPost) => mockPost.id !== id
+      );
+      const expectedState: PostState = {
+        ...initialState,
+        publicPosts: [...expectedPublicPosts],
+      };
+
+      const currentState = postsSlice(
+        initialState,
+        deletePostActionCreator(id)
       );
 
       expect(currentState).toEqual(expectedState);

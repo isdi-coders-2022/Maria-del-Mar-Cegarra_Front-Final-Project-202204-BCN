@@ -12,11 +12,14 @@ const HomePage = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(loadPublicPostsThunk(pageSize, page));
-  }, []);
+  }, [dispatch, page, pageSize]);
 
   return (
     <div className="bg-main-img bg-scroll bg-no-repeat bg-cover h-screen w-screen">
-      <PostsList posts={posts} />
+      <div className="">
+        <h1>Explore</h1>
+        <PostsList posts={posts} />
+      </div>
     </div>
   );
 };

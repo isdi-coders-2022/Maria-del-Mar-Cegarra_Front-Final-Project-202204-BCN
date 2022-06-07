@@ -1,5 +1,8 @@
 import axios from "axios";
-import { loadPublicPostsActionCreator } from "../features/postsSlice";
+import {
+  deletePostActionCreator,
+  loadPublicPostsActionCreator,
+} from "../features/postsSlice";
 import { AppDispatch } from "../store/store";
 import { showAdviseThunk, showErrorThunk } from "./UIThunks";
 
@@ -12,6 +15,16 @@ export const showErrorLoadPublicPosts = showErrorThunk(
 export const showAdviseLoadPublicPosts = showAdviseThunk(
   "You have reached the end",
   "There are no more posts to show"
+);
+
+export const showErrorDeletePost = showErrorThunk(
+  "Post has not been removed correctly",
+  "Please try again later"
+);
+
+export const showExitDeletePost = showAdviseThunk(
+  "Post deleted correctly!",
+  ""
 );
 
 export const loadPublicPostsThunk =
@@ -28,4 +41,15 @@ export const loadPublicPostsThunk =
       return;
     }
     dispatch(loadPublicPostsActionCreator(data.posts));
+  };
+
+export const deletePostThunk =
+  (id: string | undefined) => async (dispatch: AppDispatch) => {
+    const { data } = await axios.delete(`${apiUrl}posts/delete/${id}`);
+    if (!data) {
+      dispatch(showErrorDeletePost);
+      return;
+    }
+    dispatch(deletePostActionCreator(id));
+    dispatch(showExitDeletePost);
   };

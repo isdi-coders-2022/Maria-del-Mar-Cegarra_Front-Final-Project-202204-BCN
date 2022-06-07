@@ -4,6 +4,7 @@ import CredentialsValidation from "./components/CredentialsValidation/Credential
 import Navigation from "./components/Navigation/Navigation";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
+import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import { loginActionCreator } from "./redux/features/userSlice";
 import { useAppDispatch } from "./redux/hooks/hooks";
@@ -37,6 +38,15 @@ function App() {
             </CredentialsValidation>
           }
         />
+        <Route
+          path="/my-profile"
+          element={
+            <CredentialsValidation>
+              <ProfilePage />
+            </CredentialsValidation>
+          }
+        />
+
         <Route path=""></Route>
       </Routes>
       <Navigation />

@@ -1,5 +1,5 @@
 export interface IPost {
-  id?: string;
+  id?: string | undefined;
   picture: string;
   caption: string;
   date: string;

@@ -23,12 +23,12 @@ const Navigation = (): JSX.Element => {
       icon: <MapIcon />,
     },
     {
-      link: "/addPost",
+      link: "/add-post",
       text: "Add Post",
       icon: <AddIcon />,
     },
     {
-      link: "myProfile",
+      link: "my-profile",
       text: "My Profile",
       icon: <UserIcon color="" />,
     },

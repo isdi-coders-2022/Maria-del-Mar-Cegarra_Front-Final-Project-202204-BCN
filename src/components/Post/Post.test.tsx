@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { mockPosts } from "../../mocks/postMocks";
 import { store } from "../../redux/store/store";
-import { deletePostThunk } from "../../redux/thunks/postsThunks";
 import Post from "./Post";
 
 jest.mock("react-router-dom", () => ({
@@ -59,7 +58,6 @@ describe("Given the Post component", () => {
           </Provider>
         </BrowserRouter>
       );
-      const deletePost = deletePostThunk(mockPosts[0].id);
 
       const buttonDelete = screen.getByRole("button", { name: "Delete" });
       userEvent.click(buttonDelete);

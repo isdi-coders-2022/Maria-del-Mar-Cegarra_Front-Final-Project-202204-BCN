@@ -2,15 +2,19 @@ import axios from "axios";
 import { mockPosts } from "../../mocks/postMocks";
 import { AxiosPostsReturn } from "../../types/PostTypes";
 import {
+  createPostActionCreator,
   deletePostActionCreator,
   loadPublicPostsActionCreator,
 } from "../features/postsSlice";
 import {
+  createPostThunk,
   deletePostThunk,
   loadPublicPostsThunk,
   showAdviseLoadPublicPosts,
+  showErrorCreatePost,
   showErrorDeletePost,
   showErrorLoadPublicPosts,
+  showExitCreatePost,
   showExitDeletePost,
 } from "./postsThunks";
 
@@ -126,6 +130,64 @@ describe("Given the deletePostThunk function", () => {
       axios.delete = jest.fn().mockResolvedValue(mockAxiosReturn);
 
       await deletePostThunkTest(dispatch);
+
+      expect(dispatch).toHaveBeenCalledWith(expectedAction);
+    });
+  });
+});
+
+describe("Given the createPostThunk thunk", () => {
+  describe("When it receives a post object and data from response api", () => {
+    test("Then it should call dispatch with createPostActionCreator with the post by payload", async () => {
+      const newPost = mockPosts[0];
+      const mockAxiosReturn: AxiosPostsReturn = {
+        status: 201,
+        data: {
+          post: mockPosts[0],
+        },
+      };
+      const dispatch = jest.fn();
+      const createPostThunkTest = createPostThunk(newPost);
+      const expectedAction = createPostActionCreator(newPost);
+      axios.post = jest.fn().mockResolvedValue(mockAxiosReturn);
+
+      await createPostThunkTest(dispatch);
+
+      expect(dispatch).toHaveBeenNthCalledWith(1, expectedAction);
+    });
+
+    test("Then it should call dispatch with showExitCreatePost", async () => {
+      const newPost = mockPosts[0];
+      const mockAxiosReturn: AxiosPostsReturn = {
+        status: 201,
+        data: {
+          post: mockPosts[0],
+        },
+      };
+      const dispatch = jest.fn();
+      const createPostThunkTest = createPostThunk(newPost);
+      const expectedAction = showExitCreatePost;
+      axios.post = jest.fn().mockResolvedValue(mockAxiosReturn);
+
+      await createPostThunkTest(dispatch);
+
+      expect(dispatch).toHaveBeenNthCalledWith(2, expectedAction);
+    });
+  });
+
+  describe("When it receives no data from axios response", () => {
+    test("Then it should call dispatch with showErrorCreatePost", async () => {
+      const newPost = mockPosts[0];
+      const mockAxiosReturn: AxiosPostsReturn = {
+        status: 201,
+        data: null,
+      };
+      const dispatch = jest.fn();
+      const createPostThunkTest = createPostThunk(newPost);
+      const expectedAction = showErrorCreatePost;
+      axios.post = jest.fn().mockResolvedValue(mockAxiosReturn);
+
+      await createPostThunkTest(dispatch);
 
       expect(dispatch).toHaveBeenCalledWith(expectedAction);
     });

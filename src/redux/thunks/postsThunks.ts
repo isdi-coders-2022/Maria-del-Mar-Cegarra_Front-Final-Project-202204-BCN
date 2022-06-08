@@ -1,5 +1,7 @@
 import axios from "axios";
+import { IPost } from "../../types/PostTypes";
 import {
+  createPostActionCreator,
   deletePostActionCreator,
   loadPublicPostsActionCreator,
 } from "../features/postsSlice";
@@ -27,10 +29,24 @@ export const showExitDeletePost = showAdviseThunk(
   ""
 );
 
+export const showErrorCreatePost = showErrorThunk(
+  "Error posting: could not create post",
+  "Please try again later"
+);
+
+export const showExitCreatePost = showAdviseThunk(
+  "Post created successfully!",
+  ""
+);
+
 export const loadPublicPostsThunk =
   (pageSize: number, page: number) => async (dispatch: AppDispatch) => {
+    const token = window.localStorage.getItem("token");
     const { data } = await axios.get(
-      `${apiUrl}posts/pageSize=${pageSize}&page=${page}`
+      `${apiUrl}posts/pageSize=${pageSize}&page=${page}`,
+      {
+        headers: { authorization: `Bearer ${token}` },
+      }
     );
     if (!data) {
       dispatch(showErrorLoadPublicPosts);
@@ -52,4 +68,17 @@ export const deletePostThunk =
     }
     dispatch(deletePostActionCreator(id));
     dispatch(showExitDeletePost);
+  };
+
+export const createPostThunk =
+  (newPost: IPost) => async (dispatch: AppDispatch) => {
+    const { data } = await axios.post(`${apiUrl}posts/create`, {
+      body: newPost,
+    });
+    if (!data) {
+      dispatch(showErrorCreatePost);
+      return;
+    }
+    dispatch(createPostActionCreator(newPost));
+    dispatch(showExitCreatePost);
   };

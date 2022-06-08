@@ -1,10 +1,6 @@
-import jwtDecode from "jwt-decode";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginActionCreator, selectUser } from "../../redux/features/userSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
-import { store } from "../../redux/store/store";
-import { UserData } from "../../types/UserTypes";
+import { useAppSelector } from "../../redux/hooks/hooks";
 
 interface Props {
   children: JSX.Element;

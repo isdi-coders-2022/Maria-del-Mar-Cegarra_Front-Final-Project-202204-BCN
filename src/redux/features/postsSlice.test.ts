@@ -1,6 +1,8 @@
+import { current } from "@reduxjs/toolkit";
 import { mockPosts } from "../../mocks/postMocks";
 import { RootState } from "../store/store";
 import postsSlice, {
+  createPostActionCreator,
   deletePostActionCreator,
   loadPublicPostsActionCreator,
   PostState,
@@ -70,6 +72,29 @@ describe("Given the postsSlice function", () => {
       );
 
       expect(currentState).toEqual(expectedState);
+    });
+  });
+
+  describe("When it receives a createPostsActionCreator with a new post", () => {
+    test("Then it should add the post to publicPosts and userPosts of the reducer", () => {
+      const newPost = mockPosts[2];
+      const initialState: PostState = {
+        publicPosts: [mockPosts[0], mockPosts[1]],
+        userPosts: [mockPosts[0], mockPosts[1]],
+        detailPost: {},
+      };
+      const expectedPublicPosts = {
+        ...initialState,
+        publicPosts: [...initialState.publicPosts, newPost],
+        userPosts: [...initialState.userPosts, newPost],
+      };
+
+      const currentState = postsSlice(
+        initialState,
+        createPostActionCreator(newPost)
+      );
+
+      expect(currentState).toEqual(expectedPublicPosts);
     });
   });
 });

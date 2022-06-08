@@ -75,7 +75,7 @@ const RegisterForm = (): JSX.Element => {
   const renderIcon = (label: Label): JSX.Element =>
     label.id === "repeatPassword" ? (
       checkPassword() ? (
-        <CheckIcon />
+        <CheckIcon color="gray" />
       ) : (
         <CrossIcon />
       )

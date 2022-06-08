@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 
-type Error = "" | "error" | "advise" | "confirmation" | "loading";
+type Modal = "" | "error" | "advise" | "confirmation" | "loading";
 
 export interface UIState {
-  type: Error;
+  type: Modal;
   header: string;
   body: string;
 }

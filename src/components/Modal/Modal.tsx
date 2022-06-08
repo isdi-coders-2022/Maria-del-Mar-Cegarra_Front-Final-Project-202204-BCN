@@ -1,67 +1,134 @@
-import { SyntheticEvent, useEffect, useState } from "react";
-// import { closeUIActionCreator } from "../../redux/features/UISlice"
-// import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks"
+import { useEffect, useState } from "react";
+import { closeUIActionCreator } from "../../redux/features/UISlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
+import CheckIcon from "../Icons/CheckIcon";
+import ErrorIcon from "../Icons/ErrorIcon";
+import InfoIcon from "../Icons/infoIcon";
+import WarningIcon from "../Icons/WarningIcon";
 
-// const Modal = ():JSX.Element => {
-//   const ui = useAppSelector((state)=>state.ui)
-//   const dispatch = useAppDispatch()
+interface Style {
+  color: string;
+  icon: JSX.Element;
+}
 
-//   const closeModal = () => {
-//     dispatch(closeUIActionCreator())
-//   }
+type Error = "error";
+type Advise = "advise";
+type Confirmation = "confirmation";
+type Styles = {
+  [error in Error]: Style;
+} & {
+  [advise in Advise]: Style;
+} & {
+  [confirmation in Confirmation]: Style;
+};
 
-//   const showModal = (): boolean => {
-//   }
+type Type = "error" | "advise" | "confirmation";
 
-//   return (<div
-//     className="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
-//     x-show={showModal}
-//     x-transition:enter="transition duration-300"
-//     x-transition:enter-start="opacity-0"
-//     x-transition:enter-end="opacity-100"
-//     x-transition:leave="transition duration-300"
-//     x-transition:leave-start="opacity-100"
-//     x-transition:leave-end="opacity-0"
-//   >
-//     <div className="relative sm:w-3/4 md:w-1/2 lg:w-1/3 mx-2 sm:mx-auto my-10 opacity-100">
-//       <div
-//         className="relative bg-white shadow-lg rounded-lg text-gray-900 z-20"
-//         onClick={}
-//         x-show="showModal2"
-//         x-transition:enter="transition transform duration-300"
-//         x-transition:enter-start="scale-0"
-//         x-transition:enter-end="scale-100"
-//         x-transition:leave="transition transform duration-300"
-//         x-transition:leave-start="scale-100"
-//         x-transition:leave-end="scale-0"
-//       >
-//         <header className="flex flex-col justify-center items-center p-3 text-green-600">
-//           <div className="flex justify-center w-28 h-28 border-4 border-green-600 rounded-full mb-4">
-//             <svg className="fill-current w-20" viewBox="0 0 20 20">
-//               <path
-//                 d="M7.629,14.566c0.125,0.125,0.291,0.188,0.456,0.188c0.164,0,0.329-0.062,0.456-0.188l8.219-8.221c0.252-0.252,0.252-0.659,0-0.911c-0.252-0.252-0.659-0.252-0.911,0l-7.764,7.763L4.152,9.267c-0.252-0.251-0.66-0.251-0.911,0c-0.252,0.252-0.252,0.66,0,0.911L7.629,14.566z"
-//               ></path>
-//             </svg>
-//           </div>
-//           <h2 className="font-semibold text-2xl">{ui.header}</h2>
-//         </header>
-//         <main className="p-3 text-center">
-//           <p>
-//             {ui.body}
-//           </p>
-//         </main>
-//         <footer className="flex justify-center bg-transparent">
-//           <button
-//             className="bg-green-600 font-semibold text-white py-3 w-full rounded-b-md hover:bg-green-700 focus:outline-none focus:ring shadow-lg hover:shadow-none transition-all duration-300"
-//             @click="showModal2 = false"
-//           >
-//             Close
-//           </button>
-//         </footer>
-//       </div>
-//     </div>
-//   </div>
-// )
-// }
+const Modal = (action: any): JSX.Element => {
+  const { type, header, body } = useAppSelector((state) => state.ui);
+  const [modalOpen, setModalOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
-// export default Modal
+  const closeModal = () => {
+    dispatch(closeUIActionCreator());
+    setModalOpen(false);
+  };
+
+  const checkModalOpen = (type: string): boolean | string =>
+    type ? "error" || "advise" || "confirmation" : false;
+
+  useEffect(() => {
+    if (checkModalOpen(type)) {
+      setModalOpen(true);
+    }
+  }, [dispatch, type]);
+
+  const styles: Styles = {
+    error: {
+      color: "red",
+      icon: <ErrorIcon color="red" />,
+    },
+    advise: {
+      color: body === "" ? "green" : "amber",
+      icon:
+        body === "" ? (
+          <CheckIcon color="green" />
+        ) : (
+          <WarningIcon color="amber" />
+        ),
+    },
+    confirmation: {
+      color: "blue",
+      icon: <InfoIcon color="blue" />,
+    },
+  };
+
+  return (
+    <>
+      {modalOpen && (
+        <div
+          className="relative z-10"
+          aria-labelledby="modal-title"
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+            onClick={closeModal}
+          ></div>
+
+          <div className="fixed z-10 inset-0 overflow-y-auto">
+            <div className="flex items-end sm:items-center justify-center min-h-full p-4 text-center sm:p-0">
+              <div className="relative bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:max-w-lg sm:w-full">
+                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div className="sm:flex sm:items-start">
+                    <div
+                      className={`mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-${
+                        styles[type as Type].color
+                      }-100 sm:mx-0 sm:h-10 sm:w-10`}
+                    >
+                      {styles[type as Type].icon}
+                    </div>
+                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                      <h3
+                        className="text-lg leading-6 font-medium text-gray-900"
+                        id="modal-title"
+                      >
+                        {header}
+                      </h3>
+                      <div className="mt-2">
+                        <p className="text-sm text-gray-500">{body}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                  <button
+                    type="button"
+                    className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-${
+                      styles[type as Type].color
+                    }-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm`}
+                    onClick={closeModal}
+                  >
+                    Accept
+                  </button>
+                  {type === "confirmation" && (
+                    <button
+                      type="button"
+                      className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                      onClick={action}
+                    >
+                      Cancel
+                    </button>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+export default Modal;

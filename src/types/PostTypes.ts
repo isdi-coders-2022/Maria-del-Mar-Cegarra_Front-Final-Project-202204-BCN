@@ -10,7 +10,12 @@ export interface IPost {
 
 export interface AxiosPostsReturn {
   status: number;
-  data?: {
-    posts: IPost[];
-  } | null;
+  data?:
+    | {
+        posts: IPost[];
+      }
+    | {
+        post: IPost;
+      }
+    | null;
 }

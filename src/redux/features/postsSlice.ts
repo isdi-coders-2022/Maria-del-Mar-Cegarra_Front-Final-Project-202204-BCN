@@ -31,12 +31,18 @@ export const postSlice = createSlice({
         (post) => post.id !== action.payload
       ),
     }),
+    createPost: (posts, action: PayloadAction<IPost>) => ({
+      ...posts,
+      userPosts: [...posts.userPosts, action.payload],
+      publicPosts: [...posts.publicPosts, action.payload],
+    }),
   },
 });
 
 export const {
   loadPublicPosts: loadPublicPostsActionCreator,
   deletePost: deletePostActionCreator,
+  createPost: createPostActionCreator,
 } = postSlice.actions;
 
 export const selectPost = (state: RootState) => state.posts;

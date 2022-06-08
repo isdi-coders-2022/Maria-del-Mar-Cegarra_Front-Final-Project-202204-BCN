@@ -28,7 +28,7 @@ const Navigation = (): JSX.Element => {
       icon: <AddIcon />,
     },
     {
-      link: "my-profile",
+      link: "/my-profile",
       text: "My Profile",
       icon: <UserIcon color="" />,
     },
@@ -45,7 +45,7 @@ const Navigation = (): JSX.Element => {
         <div className="fixed bottom-0 left-0 right-0px-5 pt-3 bg-fuchsia-700 shadow-lg rounded-2xl w-screen">
           <ul className="flex flex-row space-x-3 justify-evenly">
             {navlinks.map((navlink) => (
-              <li className="flex group">
+              <li key={navlink.text} className="flex group">
                 <a
                   href={navlink.link}
                   className="p-3 text-white hover:text-cyan-400"

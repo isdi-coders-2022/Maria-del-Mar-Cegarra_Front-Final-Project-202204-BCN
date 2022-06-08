@@ -1,7 +1,9 @@
 import jwtDecode from "jwt-decode";
 import { Route, Routes } from "react-router-dom";
 import CredentialsValidation from "./components/CredentialsValidation/CredentialsValidation";
+import Modal from "./components/Modal/Modal";
 import Navigation from "./components/Navigation/Navigation";
+import AddPostPage from "./pages/AddPostPage/AddPostPage";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
@@ -46,10 +48,18 @@ function App() {
             </CredentialsValidation>
           }
         />
-
+        <Route
+          path="/add-post"
+          element={
+            <CredentialsValidation>
+              <AddPostPage />
+            </CredentialsValidation>
+          }
+        />
         <Route path=""></Route>
       </Routes>
       <Navigation />
+      <Modal />
     </>
   );
 }

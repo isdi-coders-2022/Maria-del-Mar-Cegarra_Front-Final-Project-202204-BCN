@@ -46,5 +46,5 @@ export interface Label {
   id: string;
   type: string;
   text: string;
-  icon: JSX.Element;
+  icon?: JSX.Element;
 }

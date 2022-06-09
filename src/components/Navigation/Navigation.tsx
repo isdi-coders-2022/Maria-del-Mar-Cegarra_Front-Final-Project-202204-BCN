@@ -1,3 +1,4 @@
+import { NavLink, useNavigate } from "react-router-dom";
 import AddIcon from "../Icons/AddIcon";
 import HomeIcon from "../Icons/HomeIcon";
 import MapIcon from "../Icons/MapIcon";
@@ -46,8 +47,8 @@ const Navigation = (): JSX.Element => {
           <ul className="flex flex-row space-x-3 justify-evenly">
             {navlinks.map((navlink) => (
               <li key={navlink.text} className="flex group">
-                <a
-                  href={navlink.link}
+                <NavLink
+                  to={navlink.link}
                   className="p-3 text-white hover:text-cyan-400"
                 >
                   <span className="flex flex-col items-center">
@@ -59,7 +60,7 @@ const Navigation = (): JSX.Element => {
 
                     <span className="h-2 w-2 rounded-full group-hover:bg-cyan transition-all duration-150 delay-100"></span>
                   </span>
-                </a>
+                </NavLink>
               </li>
             ))}
           </ul>

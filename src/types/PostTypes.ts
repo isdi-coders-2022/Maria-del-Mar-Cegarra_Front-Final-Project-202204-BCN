@@ -14,7 +14,6 @@ export interface FormPost {
   caption: string;
   hashtags: string | string[];
   gallery: string;
-  date: string;
 }
 
 export interface AxiosPostsReturn {

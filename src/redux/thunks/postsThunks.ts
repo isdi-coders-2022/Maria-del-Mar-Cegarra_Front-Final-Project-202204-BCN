@@ -5,6 +5,10 @@ import {
   deletePostActionCreator,
   loadPublicPostsActionCreator,
 } from "../features/postsSlice";
+import {
+  closeUIActionCreator,
+  showLoadingActionCreator,
+} from "../features/UISlice";
 import { AppDispatch } from "../store/store";
 import { showAdviseThunk, showErrorThunk } from "./UIThunks";
 
@@ -72,13 +76,20 @@ export const deletePostThunk =
 
 export const createPostThunk =
   (newPost: IPost) => async (dispatch: AppDispatch) => {
-    const { data } = await axios.post(`${apiUrl}posts/create`, {
-      body: newPost,
-    });
-    if (!data) {
+    try {
+      dispatch(showLoadingActionCreator());
+      const token = window.localStorage.getItem("token");
+      const { data } = await axios.post(`${apiUrl}posts/create`, newPost, {
+        headers: { authorization: `Bearer ${token}` },
+      });
+      if (!data) {
+        dispatch(showErrorCreatePost);
+        return;
+      }
+      dispatch(createPostActionCreator(newPost));
+      dispatch(closeUIActionCreator());
+      dispatch(showExitCreatePost);
+    } catch (error) {
       dispatch(showErrorCreatePost);
-      return;
     }
-    dispatch(createPostActionCreator(newPost));
-    dispatch(showExitCreatePost);
   };

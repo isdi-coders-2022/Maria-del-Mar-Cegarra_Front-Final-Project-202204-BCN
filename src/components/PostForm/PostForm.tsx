@@ -9,7 +9,6 @@ const blankData = {
   caption: "",
   hashtags: "",
   gallery: "",
-  date: Date.now().toString(),
 };
 
 interface Props {
@@ -55,18 +54,16 @@ const PostForm = ({ postId }: Props): JSX.Element => {
 
   const submitPost = (event: React.FormEvent) => {
     event.preventDefault();
-
     const newFormData = new FormData();
     newFormData.append("caption", formData.caption);
-    newFormData.append("hashtags", formData.hashtags.toString);
-    newFormData.append("date", formData.date);
+    newFormData.append("hashtags", JSON.stringify(formData.hashtags));
     newFormData.append("gallery", formData.gallery);
     newFormData.append("picture", formData.picture);
     // postId
     //   ? dispatch(editRecordThunk(postInfo.id as string, newFormData)):
     dispatch(createPostThunk(newFormData as unknown as IPost));
-    navigate("/home");
     clearData();
+    navigate("/home");
   };
 
   return (
@@ -89,6 +86,7 @@ const PostForm = ({ postId }: Props): JSX.Element => {
         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Add a caption..."
         onChange={changeFormData}
+        value={formData.caption}
       ></input>
       <label
         htmlFor="hashtags"
@@ -99,6 +97,7 @@ const PostForm = ({ postId }: Props): JSX.Element => {
         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         placeholder="Hashtags..."
         onChange={convertHashtags}
+        value={formData.hashtags}
       ></input>
       <input type="submit" onClick={submitPost}></input>
     </form>

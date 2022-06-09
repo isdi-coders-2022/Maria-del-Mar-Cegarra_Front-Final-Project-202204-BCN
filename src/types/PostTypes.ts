@@ -3,10 +3,10 @@ export interface IPost {
   picture: string;
   caption: string;
   date: string;
+  hashtags: string[];
   gallery?: string;
   likes?: number;
   comments?: number;
-  hashtags: string[];
 }
 
 export interface FormPost {

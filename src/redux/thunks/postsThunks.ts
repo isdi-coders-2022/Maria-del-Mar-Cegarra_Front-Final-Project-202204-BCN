@@ -90,6 +90,7 @@ export const createPostThunk =
       dispatch(closeUIActionCreator());
       dispatch(showExitCreatePost);
     } catch (error) {
+      dispatch(closeUIActionCreator());
       dispatch(showErrorCreatePost);
     }
   };

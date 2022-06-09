@@ -153,7 +153,7 @@ describe("Given the createPostThunk thunk", () => {
 
       await createPostThunkTest(dispatch);
 
-      expect(dispatch).toHaveBeenNthCalledWith(1, expectedAction);
+      expect(dispatch).toHaveBeenNthCalledWith(2, expectedAction);
     });
 
     test("Then it should call dispatch with showExitCreatePost", async () => {
@@ -171,17 +171,14 @@ describe("Given the createPostThunk thunk", () => {
 
       await createPostThunkTest(dispatch);
 
-      expect(dispatch).toHaveBeenNthCalledWith(2, expectedAction);
+      expect(dispatch).toHaveBeenNthCalledWith(4, expectedAction);
     });
   });
 
   describe("When it receives no data from axios response", () => {
     test("Then it should call dispatch with showErrorCreatePost", async () => {
       const newPost = mockPosts[0];
-      const mockAxiosReturn: AxiosPostsReturn = {
-        status: 201,
-        data: null,
-      };
+      const mockAxiosReturn = new Error();
       const dispatch = jest.fn();
       const createPostThunkTest = createPostThunk(newPost);
       const expectedAction = showErrorCreatePost;
@@ -189,7 +186,7 @@ describe("Given the createPostThunk thunk", () => {
 
       await createPostThunkTest(dispatch);
 
-      expect(dispatch).toHaveBeenCalledWith(expectedAction);
+      expect(dispatch).toHaveBeenNthCalledWith(2, expectedAction);
     });
   });
 });

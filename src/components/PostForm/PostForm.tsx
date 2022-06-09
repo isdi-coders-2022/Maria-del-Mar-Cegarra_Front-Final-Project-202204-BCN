@@ -92,7 +92,10 @@ const PostForm = ({ postId }: Props): JSX.Element => {
       <label
         htmlFor="caption"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-      ></label>
+        hidden={true}
+      >
+        Caption
+      </label>
       <input
         id="caption"
         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -103,7 +106,10 @@ const PostForm = ({ postId }: Props): JSX.Element => {
       <label
         htmlFor="hashtags"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-      ></label>
+        hidden={true}
+      >
+        Hashtags
+      </label>
       <input
         id="hashtags"
         className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -111,9 +117,11 @@ const PostForm = ({ postId }: Props): JSX.Element => {
         onChange={convertHashtags}
         value={formData.hashtags}
       ></input>
-      <label htmlFor="gallery"></label>
-      <ReactSelect inputId="gallery" options={options} />)
-      <input type="submit" onClick={submitPost}></input>
+      <label htmlFor="gallery" hidden={true}>
+        Gallery
+      </label>
+      <ReactSelect inputId="gallery" options={options} />
+      <input type="submit" onClick={submitPost} value="Add Post"></input>
     </form>
   );
 };

@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import { store } from "../../redux/store/store";
 import Navigation from "./Navigation";
 
@@ -9,9 +10,11 @@ describe("Given the Navigation component", () => {
       const expectedNumerOfListItems = 5;
 
       render(
-        <Provider store={store}>
-          <Navigation />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <Navigation />
+          </Provider>
+        </BrowserRouter>
       );
       const numberOfListItems = screen.getAllByRole("listitem");
       const list = screen.getByRole("list");

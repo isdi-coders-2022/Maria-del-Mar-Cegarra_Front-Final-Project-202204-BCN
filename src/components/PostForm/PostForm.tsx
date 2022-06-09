@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ReactSelect from "react-select";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { createPostThunk } from "../../redux/thunks/postsThunks";
 import { FormPost, IPost } from "../../types/PostTypes";
@@ -27,7 +28,7 @@ const PostForm = ({ postId }: Props): JSX.Element => {
     }
   }, [postId, postInfo]);
 
-  const changeFormData = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const changeFormData = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({
       ...formData,
       [event.target.id]:
@@ -52,13 +53,20 @@ const PostForm = ({ postId }: Props): JSX.Element => {
     });
   };
 
+  const options = [
+    { value: "629fb4c6f04c2909a851993f", label: "Galeria" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+
   const submitPost = (event: React.FormEvent) => {
     event.preventDefault();
     const newFormData = new FormData();
     newFormData.append("caption", formData.caption);
     newFormData.append("hashtags", JSON.stringify(formData.hashtags));
-    newFormData.append("gallery", formData.gallery);
+    newFormData.append("gallery", "629fb4c6f04c2909a851993f");
     newFormData.append("picture", formData.picture);
+    newFormData.append("userId", "6294f00e546ff50519326d9a");
     // postId
     //   ? dispatch(editRecordThunk(postInfo.id as string, newFormData)):
     dispatch(createPostThunk(newFormData as unknown as IPost));
@@ -67,7 +75,12 @@ const PostForm = ({ postId }: Props): JSX.Element => {
   };
 
   return (
-    <form action="add/edit post" noValidate autoComplete="off">
+    <form
+      className="w-full max-w-lg m-auto py-10 mt-10 px-10 border"
+      action="add/edit post"
+      noValidate
+      autoComplete="off"
+    >
       <img
         width="400px"
         height="300px"
@@ -75,7 +88,6 @@ const PostForm = ({ postId }: Props): JSX.Element => {
         src={formData.picture}
         alt="Space for adding post"
       ></img>
-
       <input type="file" id="picture" onChange={changeFormData}></input>
       <label
         htmlFor="caption"
@@ -87,7 +99,7 @@ const PostForm = ({ postId }: Props): JSX.Element => {
         placeholder="Add a caption..."
         onChange={changeFormData}
         value={formData.caption}
-      ></input>
+      />
       <label
         htmlFor="hashtags"
         className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
@@ -99,6 +111,8 @@ const PostForm = ({ postId }: Props): JSX.Element => {
         onChange={convertHashtags}
         value={formData.hashtags}
       ></input>
+      <label htmlFor="gallery"></label>
+      <ReactSelect inputId="gallery" options={options} />)
       <input type="submit" onClick={submitPost}></input>
     </form>
   );

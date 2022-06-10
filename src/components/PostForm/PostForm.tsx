@@ -18,7 +18,7 @@ interface Props {
 
 const PostForm = ({ postId }: Props): JSX.Element => {
   const [formData, setFormData] = useState<FormPost>(blankData);
-  const postInfo = useAppSelector((state) => state.posts.detailPost);
+  const postInfo = useAppSelector((state) => state.post);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

@@ -98,7 +98,6 @@ describe("Given the selectPost function", () => {
         posts: {
           publicPosts: [],
           userPosts: [],
-          detailPost: {},
         },
         user: {
           name: "",
@@ -110,6 +109,15 @@ describe("Given the selectPost function", () => {
           type: "",
           body: "",
           header: "",
+        },
+        post: {
+          picture: "",
+          caption: "",
+          hashtags: [],
+          date: "",
+          gallery: "",
+          likes: 0,
+          comments: 0,
         },
       };
 

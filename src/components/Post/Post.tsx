@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks/hooks";
 import { deletePostThunk } from "../../redux/thunks/postsThunks";
 import { IPost } from "../../types/PostTypes";
@@ -9,10 +9,15 @@ interface Props {
 
 const Post = ({ post }: Props): JSX.Element => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const deletePost = (): void => {
     dispatch(deletePostThunk(post.id));
+  };
+
+  const goToDetails = (): void => {
+    navigate(`post/${post.id}`);
   };
 
   return (
@@ -37,7 +42,12 @@ const Post = ({ post }: Props): JSX.Element => {
           </button>
         )}
       </div>
-      <img className="w-full bg-cover" src={post.picture} alt={post.caption} />
+      <img
+        onClick={goToDetails}
+        className="w-full bg-cover"
+        src={post.picture}
+        alt={post.caption}
+      />
       <div className="px-3 pb-2">
         <div className="pt-2">
           <i className="far fa-heart cursor-pointer"></i>

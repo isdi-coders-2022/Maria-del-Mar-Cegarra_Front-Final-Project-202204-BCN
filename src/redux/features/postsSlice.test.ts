@@ -5,19 +5,18 @@ import postsSlice, {
   createPostActionCreator,
   deletePostActionCreator,
   loadPublicPostsActionCreator,
-  PostState,
+  PostsState,
   selectPost,
 } from "./postsSlice";
 
 describe("Given the postsSlice function", () => {
   describe("When it receives an unknown action", () => {
     test("Then it should return the initialState", () => {
-      const initialState: PostState = {
+      const initialState: PostsState = {
         publicPosts: [],
         userPosts: [],
-        detailPost: {},
       };
-      const expectedState: PostState = { ...initialState };
+      const expectedState: PostsState = { ...initialState };
 
       const currentState = postsSlice(initialState, {
         type: "user/unknown",
@@ -30,13 +29,12 @@ describe("Given the postsSlice function", () => {
 
   describe("When it receives a loadPublicPosts with 2 posts on its payload", () => {
     test("Then it should return the initial state with the same posts in its publicPosts property", () => {
-      const initialState: PostState = {
+      const initialState: PostsState = {
         publicPosts: [],
         userPosts: [],
-        detailPost: {},
       };
       const expectedPublicPosts = mockPosts;
-      const expectedState: PostState = {
+      const expectedState: PostsState = {
         ...initialState,
         publicPosts: [...expectedPublicPosts],
       };
@@ -53,15 +51,14 @@ describe("Given the postsSlice function", () => {
   describe("When it receives a deletePostActionCreator with an id ''", () => {
     test("Then it should return the initial state without the post with this id", () => {
       const id = "2323";
-      const initialState: PostState = {
+      const initialState: PostsState = {
         publicPosts: mockPosts,
         userPosts: [],
-        detailPost: {},
       };
       const expectedPublicPosts = mockPosts.filter(
         (mockPost) => mockPost.id !== id
       );
-      const expectedState: PostState = {
+      const expectedState: PostsState = {
         ...initialState,
         publicPosts: [...expectedPublicPosts],
       };
@@ -78,10 +75,9 @@ describe("Given the postsSlice function", () => {
   describe("When it receives a createPostsActionCreator with a new post", () => {
     test("Then it should add the post to publicPosts and userPosts of the reducer", () => {
       const newPost = mockPosts[2];
-      const initialState: PostState = {
+      const initialState: PostsState = {
         publicPosts: [mockPosts[0], mockPosts[1]],
         userPosts: [mockPosts[0], mockPosts[1]],
-        detailPost: {},
       };
       const expectedPublicPosts = {
         ...initialState,
@@ -106,7 +102,6 @@ describe("Given the selectPost function", () => {
         posts: {
           publicPosts: [],
           userPosts: [],
-          detailPost: {},
         },
         user: {
           name: "",
@@ -118,6 +113,15 @@ describe("Given the selectPost function", () => {
           type: "",
           body: "",
           header: "",
+        },
+        post: {
+          picture: "",
+          caption: "",
+          hashtags: [],
+          date: "",
+          gallery: "",
+          likes: 0,
+          comments: 0,
         },
       };
 

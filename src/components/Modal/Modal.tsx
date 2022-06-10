@@ -7,8 +7,10 @@ import InfoIcon from "../Icons/infoIcon";
 import WarningIcon from "../Icons/WarningIcon";
 
 interface Style {
-  color: string;
+  colorButton: string;
+  colorIcon: string;
   icon: JSX.Element;
+  bgIcon: string;
 }
 
 type Error = "error";
@@ -35,7 +37,9 @@ const Modal = (action: any): JSX.Element => {
   };
 
   const checkModalOpen = (type: string): boolean | string =>
-    type ? "error" || "advise" || "confirmation" : false;
+    type === "error" || type === "advise" || type === "confirmation"
+      ? true
+      : false;
 
   useEffect(() => {
     if (checkModalOpen(type)) {
@@ -45,21 +49,27 @@ const Modal = (action: any): JSX.Element => {
 
   const styles: Styles = {
     error: {
-      color: "red",
-      icon: <ErrorIcon color="red" />,
+      colorButton: "button-red",
+      colorIcon: "icon-red",
+      icon: <ErrorIcon color="icon-red" />,
+      bgIcon: "bg-icon-red",
     },
     advise: {
-      color: body === "" ? "green" : "amber",
+      colorButton: body === "" ? "button-green" : "button-amber",
+      colorIcon: body === "" ? "icon-green" : "icon-amber",
       icon:
         body === "" ? (
-          <CheckIcon color="green" />
+          <CheckIcon color="icon-green" />
         ) : (
-          <WarningIcon color="amber" />
+          <WarningIcon color="icon-amber" />
         ),
+      bgIcon: body === "" ? "bg-icon-green" : "bg-icon-amber",
     },
     confirmation: {
-      color: "blue",
-      icon: <InfoIcon color="blue" />,
+      colorButton: "button-blue",
+      colorIcon: "icon-blue",
+      icon: <InfoIcon color="icon-blue" />,
+      bgIcon: "bg-icon-blue",
     },
   };
 
@@ -83,11 +93,11 @@ const Modal = (action: any): JSX.Element => {
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div
-                      className={`mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-${
-                        styles[type as Type].color
-                      }-100 sm:mx-0 sm:h-10 sm:w-10`}
+                      className={`mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full ${
+                        styles[type as Type].bgIcon
+                      } sm:mx-0 sm:h-10 sm:w-10`}
                     >
-                      {styles[type as Type].icon}
+                      {modalOpen && styles[type as Type].icon}
                     </div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <h3
@@ -105,9 +115,9 @@ const Modal = (action: any): JSX.Element => {
                 <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                   <button
                     type="button"
-                    className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-${
-                      styles[type as Type].color
-                    }-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm`}
+                    className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 ${
+                      styles[type as Type].colorButton
+                    } text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm`}
                     onClick={closeModal}
                   >
                     Accept

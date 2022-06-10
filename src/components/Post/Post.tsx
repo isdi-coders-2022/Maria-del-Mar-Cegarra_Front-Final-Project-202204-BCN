@@ -15,6 +15,10 @@ const Post = ({ post }: Props): JSX.Element => {
     dispatch(deletePostThunk(post.id));
   };
 
+  const goToDetails = (): void => {
+    navigate(`/post/${post.id}`);
+  };
+
   return (
     <div className=" rounded overflow-hidden border w-screen lg:w-6/12 md:w-6/12 bg-purple-200 my-8">
       <div className="w-full flex justify-between p-3">

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ReactSelect from "react-select";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { createPostThunk } from "../../redux/thunks/postsThunks";
+import { editPostThunk } from "../../redux/thunks/postThunk";
 import { FormPost, IPost } from "../../types/PostTypes";
 
 const blankData = {
@@ -18,7 +19,8 @@ interface Props {
 
 const PostForm = ({ postId }: Props): JSX.Element => {
   const [formData, setFormData] = useState<FormPost>(blankData);
-  const postInfo = useAppSelector((state) => state.posts.detailPost);
+  const postInfo = useAppSelector((state) => state.post);
+  const { id } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -28,7 +30,12 @@ const PostForm = ({ postId }: Props): JSX.Element => {
     }
   }, [postId, postInfo]);
 
-  const changeFormData = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const changeFormData = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+      | any
+  ): void => {
     setFormData({
       ...formData,
       [event.target.id]:
@@ -54,9 +61,9 @@ const PostForm = ({ postId }: Props): JSX.Element => {
   };
 
   const options = [
-    { value: "629fb4c6f04c2909a851993f", label: "Galeria" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
+    { value: "629fb4c6f04c2909a851993f", label: "Àmbit Galeria" },
+    { value: "62a3028cac631a84cb141693", label: "Galería Maxó" },
+    { value: "62a302fbac631a84cb141695", label: "Barcelona Art Galery" },
   ];
 
   const submitPost = (event: React.FormEvent) => {
@@ -64,12 +71,12 @@ const PostForm = ({ postId }: Props): JSX.Element => {
     const newFormData = new FormData();
     newFormData.append("caption", formData.caption);
     newFormData.append("hashtags", JSON.stringify(formData.hashtags));
-    newFormData.append("gallery", "629fb4c6f04c2909a851993f");
+    newFormData.append("gallery", formData.gallery);
     newFormData.append("picture", formData.picture);
-    newFormData.append("userId", "6294f00e546ff50519326d9a");
-    // postId
-    //   ? dispatch(editRecordThunk(postInfo.id as string, newFormData)):
-    dispatch(createPostThunk(newFormData as unknown as IPost));
+    newFormData.append("userId", id);
+    postId
+      ? dispatch(editPostThunk(postId, newFormData))
+      : dispatch(createPostThunk(newFormData as unknown as IPost));
     clearData();
     navigate("/home");
   };
@@ -120,7 +127,12 @@ const PostForm = ({ postId }: Props): JSX.Element => {
       <label htmlFor="gallery" hidden={true}>
         Gallery
       </label>
-      <ReactSelect inputId="gallery" options={options} />
+      <select id="gallery" onChange={changeFormData}>
+        <option disabled>Select gallery</option>
+        {options.map((option) => (
+          <option value={option.value}>{option.label}</option>
+        ))}
+      </select>
       <input type="submit" onClick={submitPost} value="Add Post"></input>
     </form>
   );

@@ -17,7 +17,7 @@ const Post = ({ post }: Props): JSX.Element => {
   };
 
   const goToDetails = (): void => {
-    navigate(`post/${post.id}`);
+    navigate(`/post/${post.id}`);
   };
 
   return (

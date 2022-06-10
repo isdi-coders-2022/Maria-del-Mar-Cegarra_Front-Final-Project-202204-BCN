@@ -6,9 +6,12 @@ import { mockPosts } from "../../mocks/postMocks";
 import { store } from "../../redux/store/store";
 import Post from "./Post";
 
+const mockNavigate = jest.fn();
+
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useLocation: () => ({ pathname: "/my-profile" }),
+  useNavigate: () => mockNavigate,
 }));
 
 const mockDispatch = jest.fn();
@@ -32,6 +35,21 @@ describe("Given the Post component", () => {
       const image = screen.getByRole("img", { name: mockPosts[0].caption });
 
       expect(image).toBeInTheDocument();
+    });
+
+    test("Then it should navigate to /post/2323 when clicked", () => {
+      render(
+        <BrowserRouter>
+          <Provider store={store}>
+            <Post post={mockPosts[0]} />
+          </Provider>
+        </BrowserRouter>
+      );
+
+      const image = screen.getByRole("img", { name: mockPosts[0].caption });
+      userEvent.click(image);
+
+      expect(mockNavigate).toHaveBeenCalled();
     });
   });
 

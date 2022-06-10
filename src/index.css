@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .bg-icon-red {
+    @apply bg-red-100;
+  }
+  .icon-red {
+    @apply text-red-500;
+  }
+  .button-red {
+    @apply bg-red-600 hover:bg-red-700 focus:ring-red-500;
+  }
+  .bg-icon-green {
+    @apply bg-green-100;
+  }
+  .icon-green {
+    @apply text-green-500;
+  }
+  .button-green {
+    @apply bg-green-600 hover:bg-green-700 focus:ring-green-500;
+  }
+  .bg-icon-amber {
+    @apply bg-amber-100;
+  }
+  .icon-amber {
+    @apply text-amber-500;
+  }
+  .button-amber {
+    @apply bg-amber-600 hover:bg-amber-700 focus:ring-amber-500;
+  }
+  .bg-icon-blue {
+    @apply bg-blue-100;
+  }
+  .icon-blue {
+    @apply text-blue-500;
+  }
+  .button-blue {
+    @apply bg-blue-600 hover:bg-blue-700 focus:ring-blue-500;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}

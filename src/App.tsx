@@ -4,6 +4,7 @@ import CredentialsValidation from "./components/CredentialsValidation/Credential
 import Modal from "./components/Modal/Modal";
 import Navigation from "./components/Navigation/Navigation";
 import AddPostPage from "./pages/AddPostPage/AddPostPage";
+import DetailPostPage from "./pages/DetailPage/DetailPage";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
@@ -53,6 +54,14 @@ function App() {
           element={
             <CredentialsValidation>
               <AddPostPage />
+            </CredentialsValidation>
+          }
+        />
+        <Route
+          path="/post/:id"
+          element={
+            <CredentialsValidation>
+              <DetailPostPage />
             </CredentialsValidation>
           }
         />

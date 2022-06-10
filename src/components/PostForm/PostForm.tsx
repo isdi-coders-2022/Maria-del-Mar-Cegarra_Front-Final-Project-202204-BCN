@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ReactSelect from "react-select";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { createPostThunk } from "../../redux/thunks/postsThunks";
 import { editPostThunk } from "../../redux/thunks/postThunk";

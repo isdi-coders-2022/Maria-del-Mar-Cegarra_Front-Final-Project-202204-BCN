@@ -2,22 +2,20 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IPost } from "../../types/PostTypes";
 import { RootState } from "../store/store";
 
-export interface PostState {
+export interface PostsState {
   publicPosts: IPost[];
   userPosts: IPost[];
-  detailPost: IPost | {};
 }
 
-const initialState: PostState = {
+const initialState: PostsState = {
   publicPosts: [],
   userPosts: [],
-  detailPost: {},
 };
 
 type Posts = IPost[] | [];
 type Id = string | undefined;
 
-export const postSlice = createSlice({
+export const postsSlice = createSlice({
   name: "posts",
   initialState: initialState,
   reducers: {
@@ -43,8 +41,8 @@ export const {
   loadPublicPosts: loadPublicPostsActionCreator,
   deletePost: deletePostActionCreator,
   createPost: createPostActionCreator,
-} = postSlice.actions;
+} = postsSlice.actions;
 
 export const selectPost = (state: RootState) => state.posts;
 
-export default postSlice.reducer;
+export default postsSlice.reducer;

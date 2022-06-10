@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { closeUIActionCreator } from "../../redux/features/UISlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import CheckIcon from "../Icons/CheckIcon";
+import CrossIcon from "../Icons/CrossIcon";
 import ErrorIcon from "../Icons/ErrorIcon";
 import InfoIcon from "../Icons/infoIcon";
 import WarningIcon from "../Icons/WarningIcon";
@@ -37,7 +38,9 @@ const Modal = (action: any): JSX.Element => {
   };
 
   const checkModalOpen = (type: string): boolean | string =>
-    type ? "error" || "advise" || "confirmation" : false;
+    type === "error" || type === "advise" || type === "confirmation"
+      ? true
+      : false;
 
   useEffect(() => {
     if (checkModalOpen(type)) {

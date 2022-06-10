@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { closeUIActionCreator } from "../../redux/features/UISlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import CheckIcon from "../Icons/CheckIcon";
+import CrossIcon from "../Icons/CrossIcon";
 import ErrorIcon from "../Icons/ErrorIcon";
 import InfoIcon from "../Icons/infoIcon";
 import WarningIcon from "../Icons/WarningIcon";
@@ -35,7 +36,9 @@ const Modal = (action: any): JSX.Element => {
   };
 
   const checkModalOpen = (type: string): boolean | string =>
-    type ? "error" || "advise" || "confirmation" : false;
+    type === "error" || type === "advise" || type === "confirmation"
+      ? true
+      : false;
 
   useEffect(() => {
     if (checkModalOpen(type)) {
@@ -84,10 +87,10 @@ const Modal = (action: any): JSX.Element => {
                   <div className="sm:flex sm:items-start">
                     <div
                       className={`mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-${
-                        modalOpen && styles[type as Type].color
+                        styles[type as Type].color
                       }-100 sm:mx-0 sm:h-10 sm:w-10`}
                     >
-                      {modalOpen && styles[type as Type].icon}
+                      {styles[type as Type].icon}
                     </div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                       <h3
@@ -106,7 +109,7 @@ const Modal = (action: any): JSX.Element => {
                   <button
                     type="button"
                     className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-${
-                      modalOpen && styles[type as Type].color
+                      styles[type as Type].color
                     }-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm`}
                     onClick={closeModal}
                   >

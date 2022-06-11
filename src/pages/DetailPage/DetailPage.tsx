@@ -14,10 +14,8 @@ const DetailPostPage = (): JSX.Element => {
   }, [dispatch, id]);
 
   return (
-    <div className="bg-main-img bg-scroll bg-no-repeat bg-cover h-screen w-screen">
-      <div className="backdrop-blur-md absolute border rounded-3xl content-center inset-x-0 bottom-0 top-16">
-        <PostDetails post={post} />
-      </div>
+    <div className="backdrop-blur-md absolute border rounded-3xl content-center inset-x-0 bottom-0 top-16">
+      <PostDetails post={post} />
     </div>
   );
 };

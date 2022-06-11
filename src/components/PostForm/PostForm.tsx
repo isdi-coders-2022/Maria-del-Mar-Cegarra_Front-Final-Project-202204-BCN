@@ -156,7 +156,9 @@ const PostForm = ({ postId }: Props): JSX.Element => {
         <option disabled>Select gallery</option>
         <option value="">--None</option>
         {options.map((option) => (
-          <option value={option.value}>{option.label}</option>
+          <option key={option.label} value={option.value}>
+            {option.label}
+          </option>
         ))}
       </select>
       <div className="flex justify-center">

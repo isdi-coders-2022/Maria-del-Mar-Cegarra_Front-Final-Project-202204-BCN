@@ -77,7 +77,7 @@ const RegisterForm = (): JSX.Element => {
       checkPassword() ? (
         <CheckIcon color="gray" />
       ) : (
-        <CrossIcon />
+        <CrossIcon color="text-gray-400" />
       )
     ) : (
       label.icon

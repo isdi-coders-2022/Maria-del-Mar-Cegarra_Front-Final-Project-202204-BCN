@@ -1,5 +1,5 @@
 import jwtDecode from "jwt-decode";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import CredentialsValidation from "./components/CredentialsValidation/CredentialsValidation";
 import Modal from "./components/Modal/Modal";
 import Navigation from "./components/Navigation/Navigation";
@@ -30,43 +30,17 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/register" element={<RegisterPage />}></Route>
-        <Route
-          path="/home"
-          element={
-            <CredentialsValidation>
-              <HomePage />
-            </CredentialsValidation>
-          }
-        />
-        <Route
-          path="/my-profile"
-          element={
-            <CredentialsValidation>
-              <ProfilePage />
-            </CredentialsValidation>
-          }
-        />
-        <Route
-          path="/add-post"
-          element={
-            <CredentialsValidation>
-              <AddPostPage />
-            </CredentialsValidation>
-          }
-        />
-        <Route
-          path="/post/:id"
-          element={
-            <CredentialsValidation>
-              <DetailPostPage />
-            </CredentialsValidation>
-          }
-        />
-        <Route path=""></Route>
-      </Routes>
+      <CredentialsValidation>
+        <Routes>
+          <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/register" element={<RegisterPage />}></Route>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/my-profile" element={<ProfilePage />} />
+          <Route path="/add-post" element={<AddPostPage />} />
+          <Route path="/post/:id" element={<DetailPostPage />} />
+          <Route path="/" element={<Navigate to="/home" />} />
+        </Routes>
+      </CredentialsValidation>
       <Navigation />
       <Modal />
     </>

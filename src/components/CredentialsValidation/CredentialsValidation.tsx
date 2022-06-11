@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks/hooks";
 
 interface Props {
@@ -9,12 +9,17 @@ interface Props {
 const CredentialsValidation = ({ children }: Props) => {
   const navigate = useNavigate();
   const { logged } = useAppSelector((state) => state.user);
+  const { pathname } = useLocation();
 
   useEffect((): any => {
     if (!logged) {
       navigate("/login");
+    } else {
+      if (["/login", "/register"].includes(pathname)) {
+        navigate("/home");
+      }
     }
-  }, [navigate, logged]);
+  }, [navigate, logged, pathname]);
   return children;
 };
 

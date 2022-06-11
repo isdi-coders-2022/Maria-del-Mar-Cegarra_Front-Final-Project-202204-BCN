@@ -37,9 +37,7 @@ const Modal = (action: any): JSX.Element => {
   };
 
   const checkModalOpen = (type: string): boolean | string =>
-    type === "error" || type === "advise" || type === "confirmation"
-      ? true
-      : false;
+    ["error", "advise", "confirmation"].includes(type) ? true : false;
 
   useEffect(() => {
     if (checkModalOpen(type)) {

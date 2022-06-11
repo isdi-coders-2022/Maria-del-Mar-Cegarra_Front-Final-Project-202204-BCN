@@ -1,6 +1,7 @@
 export interface IPost {
   id?: string | undefined;
   picture: string;
+  user?: string;
   pictureBackup?: string;
   caption: string;
   date: string;

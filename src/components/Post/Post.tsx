@@ -7,25 +7,29 @@ interface Props {
   post: IPost;
 }
 
-const Post = ({ post }: Props): JSX.Element => {
+const Post = ({
+  post: { id, user, picture, pictureBackup, caption, likes, comments },
+}: Props): JSX.Element => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const deletePost = (): void => {
-    dispatch(deletePostThunk(post.id));
+    dispatch(deletePostThunk(id));
   };
 
   const goToDetails = (): void => {
-    navigate(`/post/${post.id}`);
+    navigate(`/post/${id}`);
   };
+
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   return (
     <div className=" rounded overflow-hidden border w-screen lg:w-6/12 md:w-6/12 bg-purple-200 my-8">
       <div className="w-full flex justify-between p-3">
         <div className="flex">
           <div className="rounded-full h-16 w-16 bg-gray-500 flex items-center justify-center overflow-hidden">
-            <img src="" alt="profilepic" />
+            <img src="userimage" alt="profilepic" />
           </div>
           <span className="py-3 ml-5 font-bold text-2xl">User</span>
         </div>
@@ -45,24 +49,27 @@ const Post = ({ post }: Props): JSX.Element => {
       <img
         onClick={goToDetails}
         className="w-full bg-cover"
-        src={post.picture}
-        alt={post.caption}
+        alt={caption}
+        src={`${apiUrl}uploads/${picture}`}
+        onError={(error: any) => {
+          let backupSrc = pictureBackup ? pictureBackup : "";
+          (error.target as HTMLImageElement).onerror = null;
+          (error.target as HTMLImageElement).src = backupSrc as string;
+        }}
       />
       <div className="px-3 pb-2">
         <div className="pt-2">
           <i className="far fa-heart cursor-pointer"></i>
-          <span className="text-sm text-gray-400 font-medium">
-            {post.likes}
-          </span>
+          <span className="text-sm text-gray-400 font-medium">{likes}</span>
         </div>
         <div className="pt-1">
           <div className="mb-2 text-2xl">
             <span className="font-medium mr-2">User</span>
-            {post.caption}
+            {caption}
           </div>
         </div>
         <div className="text-md mb-2 text-gray-400 cursor-pointer font-medium">
-          View all {post.comments} comments
+          View all {comments} comments
         </div>
       </div>
     </div>

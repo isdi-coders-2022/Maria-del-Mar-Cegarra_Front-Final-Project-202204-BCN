@@ -23,4 +23,24 @@ describe("Given the Navigation component", () => {
       expect(numberOfListItems).toHaveLength(expectedNumerOfListItems);
     });
   });
+
+  describe("When its invoked at /home", () => {
+    test("The first link should have style text-cyan-400", () => {
+      window.history.pushState({}, "Home", "/home");
+      const expectednavigation = "Home";
+      const expectedStyle = "p-3 text-cyan-400 hover:text-cyan-400 active";
+
+      render(
+        <BrowserRouter>
+          <Provider store={store}>
+            <Navigation />
+          </Provider>
+        </BrowserRouter>
+      );
+      const homeListItem = screen.getByRole("link", {
+        name: expectednavigation,
+      });
+      expect(homeListItem).toHaveClass(expectedStyle);
+    });
+  });
 });

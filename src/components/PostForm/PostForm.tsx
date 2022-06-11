@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ReactSelect from "react-select";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { createPostThunk } from "../../redux/thunks/postsThunks";
+import { editPostThunk } from "../../redux/thunks/postThunk";
 import { FormPost, IPost } from "../../types/PostTypes";
+import CrossIcon from "../Icons/CrossIcon";
 
 const blankData = {
   picture: "",
@@ -19,6 +20,7 @@ interface Props {
 const PostForm = ({ postId }: Props): JSX.Element => {
   const [formData, setFormData] = useState<FormPost>(blankData);
   const postInfo = useAppSelector((state) => state.post);
+  const { id } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -28,7 +30,12 @@ const PostForm = ({ postId }: Props): JSX.Element => {
     }
   }, [postId, postInfo]);
 
-  const changeFormData = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const changeFormData = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+      | any
+  ): void | string => {
     setFormData({
       ...formData,
       [event.target.id]:
@@ -40,6 +47,10 @@ const PostForm = ({ postId }: Props): JSX.Element => {
 
   const clearData = () => {
     setFormData(blankData);
+  };
+
+  const removeSelectedImage = () => {
+    setFormData({ ...formData, picture: "" });
   };
 
   const convertHashtags = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,9 +65,9 @@ const PostForm = ({ postId }: Props): JSX.Element => {
   };
 
   const options = [
-    { value: "629fb4c6f04c2909a851993f", label: "Galeria" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
+    { value: "629fb4c6f04c2909a851993f", label: "Àmbit Galeria" },
+    { value: "62a3028cac631a84cb141693", label: "Galería Maxó" },
+    { value: "62a302fbac631a84cb141695", label: "Barcelona Art Galery" },
   ];
 
   const submitPost = (event: React.FormEvent) => {
@@ -64,55 +75,72 @@ const PostForm = ({ postId }: Props): JSX.Element => {
     const newFormData = new FormData();
     newFormData.append("caption", formData.caption);
     newFormData.append("hashtags", JSON.stringify(formData.hashtags));
-    newFormData.append("gallery", "629fb4c6f04c2909a851993f");
+    newFormData.append("gallery", formData.gallery);
     newFormData.append("picture", formData.picture);
-    newFormData.append("userId", "6294f00e546ff50519326d9a");
-    // postId
-    //   ? dispatch(editRecordThunk(postInfo.id as string, newFormData)):
-    dispatch(createPostThunk(newFormData as unknown as IPost));
+    newFormData.append("userId", id);
+    postId
+      ? dispatch(editPostThunk(postId, newFormData))
+      : dispatch(createPostThunk(newFormData as unknown as IPost));
     clearData();
     navigate("/home");
   };
 
   return (
     <form
-      className="w-full max-w-lg m-auto py-10 mt-10 px-10 border"
+      className="w-full max-w-lg rounded-md bg-violet-200 m-auto py-10 mt-10 px-10 border"
       action="add/edit post"
       noValidate
       autoComplete="off"
+      onSubmit={submitPost}
     >
-      <img
-        width="400px"
-        height="300px"
-        className="rounded-lg bg-violet-200"
-        src={formData.picture}
-        alt="Space for adding post"
-      ></img>
-      <input type="file" id="picture" onChange={changeFormData}></input>
-      <label
-        htmlFor="caption"
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-        hidden={true}
-      >
-        Caption
+      <div className=" relative inline-block center my-2.5 p-2.5 w-full h-72 text-sm bg-violet-300 rounded-lg border border-gray-300 focus-border-input">
+        {formData.picture && (
+          <>
+            <img
+              src={URL.createObjectURL(formData.picture as Blob)}
+              alt="Your uploads"
+              className="max-w-full max-h-64"
+            />
+            <button
+              data-testid="Delete"
+              className="absolute top-0 right-2.5 my-2 p-2.5 w-50 text-sm text-gray-900 bg-violet-400 hover:bg-violet-500 rounded-full border border-gray-300 focus-border-input"
+              onClick={removeSelectedImage}
+            >
+              <CrossIcon color="text-slate-900" />
+            </button>
+          </>
+        )}
+      </div>
+      <label htmlFor="picture" hidden={true}>
+        Picture
       </label>
       <input
+        type="file"
+        id="picture"
+        className="block center my-2.5 p-2.5 w-full text-sm text-gray-900 bg-violet-300 hover:bg-violet-500 rounded-lg border border-gray-300 focus-border-input file:mr-4 file:py-2 file:px-4
+        file:rounded-full file:border-0
+        file:text-sm file:font-semibold
+        file:bg-violet-50 file:text-violet-700
+        hover:file:bg-violet-100"
+        onChange={changeFormData}
+      ></input>
+      <label htmlFor="caption" hidden={true}>
+        Caption
+      </label>
+      <textarea
         id="caption"
-        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="block my-2.5 p-5 w-full h-24 text-sm text-gray-900 bg-violet-300 rounded-lg border border-gray-300 focus-border-input"
         placeholder="Add a caption..."
         onChange={changeFormData}
         value={formData.caption}
       />
-      <label
-        htmlFor="hashtags"
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400"
-        hidden={true}
-      >
+      <label htmlFor="hashtags" hidden={true}>
         Hashtags
       </label>
       <input
         id="hashtags"
-        className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        type="text"
+        className="block my-2.5 p-2.5 w-full text-sm text-gray-900 bg-violet-300 rounded-lg border border-gray-300 focus-border-input"
         placeholder="Hashtags..."
         onChange={convertHashtags}
         value={formData.hashtags}
@@ -120,8 +148,25 @@ const PostForm = ({ postId }: Props): JSX.Element => {
       <label htmlFor="gallery" hidden={true}>
         Gallery
       </label>
-      <ReactSelect inputId="gallery" options={options} />
-      <input type="submit" onClick={submitPost} value="Add Post"></input>
+      <select
+        id="gallery"
+        onChange={changeFormData}
+        className="block my-2.5 p-2.5 w-full text-sm text-gray-900 bg-violet-300 rounded-lg border border-gray-300 focus-border-input"
+      >
+        <option disabled>Select gallery</option>
+        <option value="">--None</option>
+        {options.map((option) => (
+          <option value={option.value}>{option.label}</option>
+        ))}
+      </select>
+      <div className="flex justify-center">
+        <input
+          type="submit"
+          onClick={submitPost}
+          value="Add Post"
+          className="block place-self-center my-2.5 p-4 px-7 w-50 text-sm text-slate-100 font-semibold bg-violet-500 hover:bg-violet-500 rounded-2xl border hover:border-violet-600 focus-border-input cursor-pointer"
+        ></input>
+      </div>
     </form>
   );
 };

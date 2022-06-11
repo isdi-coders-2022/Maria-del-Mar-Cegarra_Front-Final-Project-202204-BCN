@@ -1,5 +1,6 @@
 import axios from "axios";
-import { loadPostActionCreator, PostState } from "../features/postSlice";
+import { loadPostActionCreator } from "../features/postSlice";
+
 import {
   closeUIActionCreator,
   showLoadingActionCreator,
@@ -44,7 +45,7 @@ export const loadPostThunk =
   };
 
 export const editPostThunk =
-  (postId: string, post: PostState) => async (dispatch: AppDispatch) => {
+  (postId: string, post: FormData) => async (dispatch: AppDispatch) => {
     try {
       dispatch(showLoadingActionCreator());
       const token = localStorage.getItem("token");

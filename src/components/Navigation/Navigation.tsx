@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import AddIcon from "../Icons/AddIcon";
 import HomeIcon from "../Icons/HomeIcon";
 import MapIcon from "../Icons/MapIcon";
@@ -12,6 +12,7 @@ interface Navlink {
 }
 
 const Navigation = (): JSX.Element => {
+  const { pathname } = useLocation();
   const navlinks: Navlink[] = [
     {
       link: "/home",
@@ -41,15 +42,17 @@ const Navigation = (): JSX.Element => {
   ];
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex relative items-center justify-center">
       <div className="flex flex-col">
-        <div className="fixed bottom-0 left-0 right-0px-5 pt-3 bg-fuchsia-700 shadow-lg rounded-2xl w-screen">
+        <div className="fixed bottom-0 left-0 right-0 px-5 pt-2 bg-violet-500 opacity-90 shadow-lg rounded-2xl w-screen">
           <ul className="flex flex-row space-x-3 justify-evenly">
             {navlinks.map((navlink) => (
               <li key={navlink.text} className="flex group">
                 <NavLink
                   to={navlink.link}
-                  className="p-3 text-white hover:text-cyan-400"
+                  className={`p-3 ${
+                    pathname === navlink.link ? "text-cyan-400" : "text-white"
+                  } hover:text-cyan-400`}
                 >
                   <span className="flex flex-col items-center">
                     {navlink.icon}

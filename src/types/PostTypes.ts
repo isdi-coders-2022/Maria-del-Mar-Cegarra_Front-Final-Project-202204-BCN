@@ -1,6 +1,7 @@
 export interface IPost {
   id?: string | undefined;
   picture: string;
+  pictureBackup?: string;
   caption: string;
   date: string;
   hashtags: string[];
@@ -10,7 +11,7 @@ export interface IPost {
 }
 
 export interface FormPost {
-  picture: string;
+  picture: string | Blob;
   caption: string;
   hashtags: string | string[];
   gallery: string;

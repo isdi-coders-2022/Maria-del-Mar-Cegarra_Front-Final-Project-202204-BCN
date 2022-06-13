@@ -7,13 +7,15 @@ interface Props {
 
 const PostsList = (props: Props): JSX.Element => {
   return (
-    <ul>
-      {props.posts.map((post: IPost) => (
-        <li key={post.id}>
-          <Post post={post} />
-        </li>
-      ))}
-    </ul>
+    <>
+      <ul>
+        {props.posts.map((post: IPost) => (
+          <li key={post.id}>
+            <Post post={post} />
+          </li>
+        ))}
+      </ul>
+    </>
   );
 };
 

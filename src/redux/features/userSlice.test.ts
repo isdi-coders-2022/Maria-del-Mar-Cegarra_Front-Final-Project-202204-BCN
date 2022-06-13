@@ -115,9 +115,24 @@ describe("Given the selectPost function", () => {
           caption: "",
           hashtags: [],
           date: "",
-          gallery: "",
+          gallery: {
+            name: "",
+            location: "",
+            id: "",
+          },
+          user: {
+            id: "",
+            name: "",
+            username: "",
+            profilePic: "",
+            profilePicBackup: "",
+          },
           likes: 0,
           comments: 0,
+        },
+        pagination: {
+          publicPostsPage: 1,
+          userPostsPage: 1,
         },
       };
 

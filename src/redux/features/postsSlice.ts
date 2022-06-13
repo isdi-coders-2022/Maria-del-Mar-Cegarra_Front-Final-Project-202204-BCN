@@ -21,11 +21,11 @@ export const postsSlice = createSlice({
   reducers: {
     loadPublicPosts: (posts, action: PayloadAction<Posts>) => ({
       ...posts,
-      publicPosts: [...posts.publicPosts, ...action.payload],
+      publicPosts: [...action.payload],
     }),
     loadUserPosts: (posts, action: PayloadAction<Posts>) => ({
       ...posts,
-      userPosts: [...posts.userPosts, ...action.payload],
+      userPosts: [...action.payload],
     }),
     deletePost: (posts, action: PayloadAction<Id>) => ({
       ...posts,
@@ -38,6 +38,14 @@ export const postsSlice = createSlice({
       userPosts: [...posts.userPosts, action.payload],
       publicPosts: [...posts.publicPosts, action.payload],
     }),
+    editPost: (posts, action: PayloadAction<IPost>) => ({
+      userPosts: posts.userPosts.map((post) =>
+        post.id === action.payload.id ? { ...action.payload } : post
+      ),
+      publicPosts: posts.publicPosts.map((post) =>
+        post.id === action.payload.id ? { ...action.payload } : post
+      ),
+    }),
   },
 });
 
@@ -46,6 +54,7 @@ export const {
   loadUserPosts: loadUserPostsActionCreator,
   deletePost: deletePostActionCreator,
   createPost: createPostActionCreator,
+  editPost: editPostActionCreator,
 } = postsSlice.actions;
 
 export const selectPost = (state: RootState) => state.posts;

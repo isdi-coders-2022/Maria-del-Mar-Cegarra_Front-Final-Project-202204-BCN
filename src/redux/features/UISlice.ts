@@ -7,6 +7,7 @@ export interface UIState {
   type: Modal;
   header: string;
   body: string;
+  action?: any;
 }
 
 const initialUI: UIState = {
@@ -18,6 +19,7 @@ const initialUI: UIState = {
 interface UIModalInfo {
   header: string;
   body: string;
+  action?: any;
 }
 
 export const uiSlice = createSlice({

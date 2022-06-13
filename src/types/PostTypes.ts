@@ -1,12 +1,14 @@
+import { UserData } from "./UserTypes";
+
 export interface IPost {
-  id?: string | undefined;
+  id?: string;
   picture: string;
-  user?: string;
+  user: UserData;
   pictureBackup?: string;
   caption: string;
   date: string;
   hashtags: string[];
-  gallery?: string;
+  gallery: Gallery;
   likes?: number;
   comments?: number;
 }
@@ -15,7 +17,7 @@ export interface FormPost {
   picture: string | Blob;
   caption: string;
   hashtags: string | string[];
-  gallery: string;
+  galleryId: string;
 }
 
 export interface AxiosPostsReturn {
@@ -28,4 +30,10 @@ export interface AxiosPostsReturn {
         post: IPost;
       }
     | null;
+}
+
+export interface Gallery {
+  name: string;
+  location: string;
+  id: string;
 }

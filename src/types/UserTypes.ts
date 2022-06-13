@@ -22,11 +22,12 @@ export interface UserData {
   id: string;
   name: string;
   username: string;
-  email: string;
-  avatar: string;
-  followers: number;
-  following: number;
-  logged: boolean;
+  email?: string;
+  profilePic: string;
+  profilePicBackup: string;
+  followers?: number;
+  following?: number;
+  logged?: boolean;
 }
 
 export interface RegisterFormData {

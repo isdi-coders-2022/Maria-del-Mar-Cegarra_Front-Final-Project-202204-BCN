@@ -26,14 +26,19 @@ type Styles = {
 
 type Type = "error" | "advise" | "confirmation";
 
-const Modal = (action: any): JSX.Element => {
-  const { type, header, body } = useAppSelector((state) => state.ui);
+const Modal = (): JSX.Element => {
+  const { type, header, body, action } = useAppSelector((state) => state.ui);
   const [modalOpen, setModalOpen] = useState(false);
   const dispatch = useAppDispatch();
 
   const closeModal = () => {
     dispatch(closeUIActionCreator());
     setModalOpen(false);
+  };
+
+  const doActionAndCloseModal = (): void => {
+    dispatch(action);
+    closeModal();
   };
 
   const checkModalOpen = (type: string): boolean | string =>
@@ -116,7 +121,7 @@ const Modal = (action: any): JSX.Element => {
                     className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 ${
                       styles[type as Type].colorButton
                     } text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm`}
-                    onClick={closeModal}
+                    onClick={action ? doActionAndCloseModal : closeModal}
                   >
                     Accept
                   </button>
@@ -124,7 +129,7 @@ const Modal = (action: any): JSX.Element => {
                     <button
                       type="button"
                       className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                      onClick={action}
+                      onClick={closeModal}
                     >
                       Cancel
                     </button>

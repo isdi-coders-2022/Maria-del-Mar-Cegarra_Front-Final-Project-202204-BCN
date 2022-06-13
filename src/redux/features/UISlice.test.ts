@@ -127,10 +127,13 @@ describe("Given the uiSlice function", () => {
 
   describe("When it receives the closeUI", () => {
     test("Then it should return type: '' , body: '' and header: ''", () => {
+      const action = () => {};
+
       const initialState: UIState = {
         type: "",
         header: "",
         body: "",
+        action,
       };
       const expectedUIState = {
         type: "",
@@ -172,6 +175,10 @@ describe("Given the selectPost function", () => {
           gallery: "",
           likes: 0,
           comments: 0,
+        },
+        pagination: {
+          publicPostsPage: 1,
+          userPostsPage: 1,
         },
       };
 

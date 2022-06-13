@@ -3,8 +3,10 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import CredentialsValidation from "./components/CredentialsValidation/CredentialsValidation";
 import Modal from "./components/Modal/Modal";
 import Navigation from "./components/Navigation/Navigation";
+import Spinner from "./components/Spinner/Spinner";
 import AddPostPage from "./pages/AddPostPage/AddPostPage";
 import DetailPostPage from "./pages/DetailPage/DetailPage";
+import EditPostPage from "./pages/EditPostPage/EditPostPage";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
@@ -30,6 +32,7 @@ function App() {
 
   return (
     <>
+      <Modal />
       <CredentialsValidation>
         <Routes>
           <Route path="/login" element={<LoginPage />}></Route>
@@ -38,11 +41,12 @@ function App() {
           <Route path="/my-profile" element={<ProfilePage />} />
           <Route path="/add-post" element={<AddPostPage />} />
           <Route path="/post/:id" element={<DetailPostPage />} />
+          <Route path="/post/edit/:postId" element={<EditPostPage />} />
           <Route path="/" element={<Navigate to="/home" />} />
         </Routes>
       </CredentialsValidation>
       <Navigation />
-      <Modal />
+      <Spinner />
     </>
   );
 }

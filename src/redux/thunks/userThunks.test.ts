@@ -36,7 +36,7 @@ describe("Given the registerUserThunk", () => {
 
       await registerUserThunkTest(dispatch);
 
-      expect(dispatch).toHaveBeenNthCalledWith(1, expectedAction);
+      expect(dispatch).toHaveBeenNthCalledWith(2, expectedAction);
     });
   });
 
@@ -66,7 +66,7 @@ describe("Given the registerUserThunk", () => {
 
       await registerUserThunkTest(dispatch);
 
-      expect(dispatch).toHaveBeenNthCalledWith(1, expectedAction);
+      expect(dispatch).toHaveBeenNthCalledWith(2, expectedAction);
     });
   });
 });

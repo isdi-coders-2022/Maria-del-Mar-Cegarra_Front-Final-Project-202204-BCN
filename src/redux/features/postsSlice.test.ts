@@ -5,6 +5,7 @@ import postsSlice, {
   createPostActionCreator,
   deletePostActionCreator,
   loadPublicPostsActionCreator,
+  loadUserPostsActionCreator,
   PostsState,
   selectPost,
 } from "./postsSlice";
@@ -28,19 +29,19 @@ describe("Given the postsSlice function", () => {
   });
 
   describe("When it receives a loadPublicPosts with 2 posts on its payload", () => {
-    test("Then it should return the initial state with the same posts in its publicPosts property", () => {
-      const initialState: PostsState = {
+    test("Then it should return the previus state with the same posts in its publicPosts property", () => {
+      const previusState: PostsState = {
         publicPosts: [],
         userPosts: [],
       };
       const expectedPublicPosts = mockPosts;
       const expectedState: PostsState = {
-        ...initialState,
+        ...previusState,
         publicPosts: [...expectedPublicPosts],
       };
 
       const currentState = postsSlice(
-        initialState,
+        previusState,
         loadPublicPostsActionCreator(expectedPublicPosts)
       );
 
@@ -48,10 +49,31 @@ describe("Given the postsSlice function", () => {
     });
   });
 
+  describe("When it receives a loadUserPostsActionCreator with 2 posts by payload", () => {
+    test("Then it should return the state with", () => {
+      const previusState: PostsState = {
+        publicPosts: [],
+        userPosts: [],
+      };
+      const expectedUserPosts = mockPosts;
+      const expectedState: PostsState = {
+        ...previusState,
+        userPosts: [...expectedUserPosts],
+      };
+
+      const currentState = postsSlice(
+        previusState,
+        loadUserPostsActionCreator(expectedUserPosts)
+      );
+
+      expect(currentState).toEqual(expectedState);
+    });
+  });
+
   describe("When it receives a deletePostActionCreator with an id ''", () => {
-    test("Then it should return the initial state without the post with this id", () => {
+    test("Then it should return the previus state without the post with this id", () => {
       const id = "2323";
-      const initialState: PostsState = {
+      const previusState: PostsState = {
         publicPosts: mockPosts,
         userPosts: [],
       };
@@ -59,12 +81,12 @@ describe("Given the postsSlice function", () => {
         (mockPost) => mockPost.id !== id
       );
       const expectedState: PostsState = {
-        ...initialState,
+        ...previusState,
         publicPosts: [...expectedPublicPosts],
       };
 
       const currentState = postsSlice(
-        initialState,
+        previusState,
         deletePostActionCreator(id)
       );
 
@@ -75,18 +97,18 @@ describe("Given the postsSlice function", () => {
   describe("When it receives a createPostsActionCreator with a new post", () => {
     test("Then it should add the post to publicPosts and userPosts of the reducer", () => {
       const newPost = mockPosts[2];
-      const initialState: PostsState = {
+      const previusState: PostsState = {
         publicPosts: [mockPosts[0], mockPosts[1]],
         userPosts: [mockPosts[0], mockPosts[1]],
       };
       const expectedPublicPosts = {
-        ...initialState,
-        publicPosts: [...initialState.publicPosts, newPost],
-        userPosts: [...initialState.userPosts, newPost],
+        ...previusState,
+        publicPosts: [...previusState.publicPosts, newPost],
+        userPosts: [...previusState.userPosts, newPost],
       };
 
       const currentState = postsSlice(
-        initialState,
+        previusState,
         createPostActionCreator(newPost)
       );
 
@@ -119,9 +141,24 @@ describe("Given the selectPost function", () => {
           caption: "",
           hashtags: [],
           date: "",
-          gallery: "",
+          gallery: {
+            name: "",
+            location: "",
+            id: "",
+          },
+          user: {
+            id: "",
+            name: "",
+            username: "",
+            profilePic: "",
+            profilePicBackup: "",
+          },
           likes: 0,
           comments: 0,
+        },
+        pagination: {
+          publicPostsPage: 1,
+          userPostsPage: 1,
         },
       };
 

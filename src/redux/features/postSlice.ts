@@ -1,16 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IPost } from "../../types/PostTypes";
 
-export interface PostState {
-  picture: string;
-  caption: string;
-  hashtags: string[];
-  date: string;
-  gallery: string;
-  likes?: number;
-  comments?: number;
-}
-
-const initialState: PostState = {
+const initialState: IPost = {
   picture: "",
   caption: "",
   hashtags: [],
@@ -18,18 +9,24 @@ const initialState: PostState = {
   gallery: "",
   likes: 0,
   comments: 0,
+  user: "",
+  pictureBackup: "",
 };
 
 export const postSlice = createSlice({
   name: "post",
   initialState: initialState,
   reducers: {
-    loadPost: (post, action: PayloadAction<PostState>) => ({
+    loadPost: (post, action: PayloadAction<IPost>) => ({
       ...action.payload,
     }),
+    deletePost: () => ({ ...initialState }),
   },
 });
 
 export default postSlice.reducer;
 
-export const { loadPost: loadPostActionCreator } = postSlice.actions;
+export const {
+  loadPost: loadPostActionCreator,
+  deletePost: deletePostDetailActionCreator,
+} = postSlice.actions;

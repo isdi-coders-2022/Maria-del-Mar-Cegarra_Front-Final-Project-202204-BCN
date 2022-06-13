@@ -1,17 +1,18 @@
 import { useEffect } from "react";
 import PostsList from "../../components/PostsList/PostsList";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
-import { loadPublicPostsThunk } from "../../redux/thunks/postsThunks";
+import { loadUserPostsThunk } from "../../redux/thunks/postsThunks";
 
 const ProfilePage = (): JSX.Element => {
-  const profilePosts = useAppSelector((state) => state.posts.publicPosts);
+  const profilePosts = useAppSelector((state) => state.posts.userPosts);
+  const page = useAppSelector((state) => state.pagination.userPostsPage);
+  const { id } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-  const pageSize = 2;
-  const page = 2;
 
   useEffect(() => {
-    dispatch(loadPublicPostsThunk(pageSize, page));
-  }, [dispatch, page, pageSize]);
+    const pageSize = 10;
+    dispatch(loadUserPostsThunk(id, pageSize, page));
+  }, [dispatch, id, page]);
 
   return (
     <div className="backdrop-blur-md absolute border rounded-3xl content-center inset-x-0 bottom-0 top-16">

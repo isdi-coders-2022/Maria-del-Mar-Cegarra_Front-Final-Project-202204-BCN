@@ -94,7 +94,7 @@ describe("Given the deletePostThunk function", () => {
 
       await deletePostThunkTest(dispatch);
 
-      expect(dispatch).toHaveBeenNthCalledWith(1, expectedAction);
+      expect(dispatch).toHaveBeenNthCalledWith(2, expectedAction);
     });
 
     test("Then it should call dispatch with showAdviseThunk with 'Post deleted correctly!' and ''", async () => {
@@ -113,7 +113,7 @@ describe("Given the deletePostThunk function", () => {
 
       await deletePostThunkTest(dispatch);
 
-      expect(dispatch).toHaveBeenNthCalledWith(2, expectedAction);
+      expect(dispatch).toHaveBeenNthCalledWith(3, expectedAction);
     });
   });
 
@@ -171,7 +171,7 @@ describe("Given the createPostThunk thunk", () => {
 
       await createPostThunkTest(dispatch);
 
-      expect(dispatch).toHaveBeenNthCalledWith(4, expectedAction);
+      expect(dispatch).toHaveBeenNthCalledWith(3, expectedAction);
     });
   });
 

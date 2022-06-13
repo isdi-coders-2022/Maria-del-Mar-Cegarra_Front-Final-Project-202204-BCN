@@ -1,4 +1,9 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  AnyAction,
+  createSlice,
+  PayloadAction,
+  ThunkAction,
+} from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 
 type Modal = "" | "error" | "advise" | "confirmation" | "loading";
@@ -7,6 +12,7 @@ export interface UIState {
   type: Modal;
   header: string;
   body: string;
+  action?: any;
 }
 
 const initialUI: UIState = {
@@ -18,6 +24,7 @@ const initialUI: UIState = {
 interface UIModalInfo {
   header: string;
   body: string;
+  action?: any;
 }
 
 export const uiSlice = createSlice({

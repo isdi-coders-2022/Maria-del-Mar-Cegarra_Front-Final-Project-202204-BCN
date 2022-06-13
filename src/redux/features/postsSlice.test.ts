@@ -123,6 +123,10 @@ describe("Given the selectPost function", () => {
           likes: 0,
           comments: 0,
         },
+        pagination: {
+          publicPostsPage: 1,
+          userPostsPage: 1,
+        },
       };
 
       const postsState = selectPost(state);

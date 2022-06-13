@@ -30,16 +30,17 @@ export const loadPostThunk =
     try {
       dispatch(showLoadingActionCreator());
       const token = localStorage.getItem("token");
-      const { data: post } = await axios.get(`${apiUrl}posts/${postId}`, {
+      const {
+        data: { post },
+      } = await axios.get(`${apiUrl}posts/${postId}`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      if (!post) {
+      if (post) {
         dispatch(loadPostActionCreator(post));
         dispatch(closeUIActionCreator());
         return;
       }
     } catch (error) {
-      dispatch(closeUIActionCreator());
       dispatch(showErrorLoadPost);
     }
   };
@@ -56,13 +57,10 @@ export const editPostThunk =
       });
       if (status === 204) {
         dispatch(loadPostThunk(postId));
-        dispatch(closeUIActionCreator());
         dispatch(showExitEditPost);
       }
-      dispatch(closeUIActionCreator());
       dispatch(showErrorEditPost);
     } catch (error) {
-      dispatch(closeUIActionCreator());
       dispatch(showErrorEditPost);
     }
   };

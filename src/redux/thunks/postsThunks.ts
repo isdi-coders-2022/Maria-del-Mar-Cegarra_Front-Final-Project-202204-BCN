@@ -4,6 +4,7 @@ import {
   createPostActionCreator,
   deletePostActionCreator,
   loadPublicPostsActionCreator,
+  loadUserPostsActionCreator,
 } from "../features/postsSlice";
 import {
   closeUIActionCreator,
@@ -45,33 +46,76 @@ export const showExitCreatePost = showAdviseThunk(
 
 export const loadPublicPostsThunk =
   (pageSize: number, page: number) => async (dispatch: AppDispatch) => {
-    const token = window.localStorage.getItem("token");
-    const { data } = await axios.get(
-      `${apiUrl}posts/pageSize=${pageSize}&page=${page}`,
-      {
-        headers: { authorization: `Bearer ${token}` },
+    try {
+      dispatch(showLoadingActionCreator());
+      const token = window.localStorage.getItem("token");
+      const { data } = await axios.get(
+        `${apiUrl}posts/pageSize=${pageSize}&page=${page}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      if (!data) {
+        dispatch(showErrorLoadPublicPosts);
+        return;
       }
-    );
-    if (!data) {
+      if (!data.posts.length) {
+        dispatch(showAdviseLoadPublicPosts);
+        return;
+      }
+      dispatch(loadPublicPostsActionCreator(data.posts));
+      dispatch(closeUIActionCreator());
+    } catch (error) {
       dispatch(showErrorLoadPublicPosts);
-      return;
     }
-    if (!data.posts.length) {
-      dispatch(showAdviseLoadPublicPosts);
-      return;
+  };
+
+export const loadUserPostsThunk =
+  (userId: string, pageSize: number, page: number) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch(showLoadingActionCreator());
+      const token = window.localStorage.getItem("token");
+      const { data } = await axios.get(
+        `${apiUrl}posts/user-posts/user=${userId}&pageSize=${pageSize}&page=${page}`,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
+      if (!data) {
+        dispatch(showErrorLoadPublicPosts);
+        return;
+      }
+      if (!data.posts.length) {
+        dispatch(showAdviseLoadPublicPosts);
+        return;
+      }
+      dispatch(loadUserPostsActionCreator(data.posts));
+      dispatch(closeUIActionCreator());
+    } catch (error) {
+      dispatch(showErrorLoadPublicPosts);
     }
-    dispatch(loadPublicPostsActionCreator(data.posts));
   };
 
 export const deletePostThunk =
   (id: string | undefined) => async (dispatch: AppDispatch) => {
-    const { data } = await axios.delete(`${apiUrl}posts/delete/${id}`);
-    if (!data) {
+    try {
+      dispatch(showLoadingActionCreator());
+      const token = window.localStorage.getItem("token");
+      const { data } = await axios.delete(`${apiUrl}posts/delete/${id}`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      });
+      if (!data) {
+        dispatch(showErrorDeletePost);
+        return;
+      }
+      dispatch(deletePostActionCreator(id));
+      dispatch(showExitDeletePost);
+    } catch (error) {
       dispatch(showErrorDeletePost);
-      return;
     }
-    dispatch(deletePostActionCreator(id));
-    dispatch(showExitDeletePost);
   };
 
 export const createPostThunk =
@@ -87,10 +131,8 @@ export const createPostThunk =
         return;
       }
       dispatch(createPostActionCreator(newPost));
-      dispatch(closeUIActionCreator());
       dispatch(showExitCreatePost);
     } catch (error) {
-      dispatch(closeUIActionCreator());
       dispatch(showErrorCreatePost);
     }
   };

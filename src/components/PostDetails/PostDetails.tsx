@@ -1,61 +1,121 @@
-import { FaReact } from "react-icons/fa";
-import { SiTypescript } from "react-icons/si";
-import { AiOutlineClockCircle } from "react-icons/ai";
-import { VscChecklist } from "react-icons/vsc";
-import { FaPlay } from "react-icons/fa";
-import { PostState } from "../../redux/features/postSlice";
+import { useNavigate } from "react-router-dom";
+import { deletePostDetailActionCreator } from "../../redux/features/postSlice";
+import { deletePostActionCreator } from "../../redux/features/postsSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
+import { deletePostThunk } from "../../redux/thunks/postsThunks";
+import { showConfirmationDeletePost } from "../../redux/thunks/UIThunks";
+import { IPost } from "../../types/PostTypes";
+import prettifyDate from "../utils/prettifyDate";
 
 interface Props {
-  post: PostState;
+  post: IPost;
 }
 
-const PostDetails = ({ post }: Props): JSX.Element => {
+const PostDetails = ({
+  post: {
+    id,
+    user,
+    picture,
+    caption,
+    date,
+    pictureBackup,
+    gallery,
+    comments,
+    likes,
+  },
+}: Props): JSX.Element => {
+  const apiUrl = process.env.REACT_APP_API_URL;
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { id: userId } = useAppSelector((state) => state.user);
+
+  const goToEdit = () => {
+    navigate(`/post/edit/${id}`);
+  };
+
+  const deletePost = (): void => {
+    dispatch(deletePostThunk(id));
+    dispatch(deletePostDetailActionCreator());
+    navigate("/my-profile");
+  };
+
   return (
-    <div className="md:w-[50rem] md:h-[20.5rem] w-[20.5rem] h-[40rem] p-4 rounded-2xl bg-white dark:bg-slate-800 shadow-lg dark:shadow-slate-700 flex flex-col ease-linear duration-300 md:flex-row-reverse">
-      <div className=" h-full w-full  shadow-md rounded-2xl basis-2/3 relative">
-        <div className=" text-white z-10 bg-[#5865F2] absolute pl-8 pr-8 pb-2 pt-2  rounded-tl-2xl rounded-br-2xl font-semibold">
-          <h1>FREE</h1>
+    <>
+      <div className="md:w-[60rem]  w-[20.5rem] p-4 rounded-2xl bg-violet-200 shadow-lg  flex flex-col ease-linear duration-200 md:flex-row">
+        <div className="relative">
+          <div className="flex my-2">
+            <div className="rounded-full h-16 w-16 bg-gray-500 flex items-center justify-center overflow-hidden">
+              <img src="userimage" alt="profilepic" />
+            </div>
+            <span className="py-3 ml-5 font-bold text-xl">User</span>
+            <span className="px-2 hover:bg-gray-300 cursor-pointer rounded">
+              <i className="fas fa-ellipsis-h pt-2 text-lg"></i>
+            </span>
+          </div>
+          <div className="w-full shadow-md rounded-2xl relative">
+            <div className="w-full relative border-2 border-white rounded-2xl">
+              <img
+                src={`${apiUrl}uploads/${picture}`}
+                onError={(error: any) => {
+                  let backupSrc = pictureBackup ? pictureBackup : "";
+                  (error.target as HTMLImageElement).onerror = null;
+                  (error.target as HTMLImageElement).src = backupSrc as string;
+                }}
+                alt="Post"
+                className=" rounded-2xl"
+              />
+            </div>
+          </div>
         </div>
-        <div className="h-full w-full relative border-2 border-white rounded-2xl">
-          <img src={post.picture} alt="thumbnail" className=" rounded-2xl" />
+        <div className="md:mx-10 md:pt-16">
+          <div className="pb-2">
+            <div className="pt-2">
+              <i className="far fa-heart cursor-pointer"></i>
+              <span className="text-sm text-gray-400 font-medium">{likes}</span>
+            </div>
+            <div className="pt-1">
+              <span className="font-medium mr-2">{prettifyDate(date)}</span>
+              <div className="mb-2 text-lg">
+                <span className="font-medium mr-2">User</span>
+                {caption}
+              </div>
+            </div>
+            <div className="text-md mb-2 text-gray-400 cursor-pointer font-medium">
+              View all {comments} comments
+            </div>
+          </div>
+
+          <div className="flex flex-row items-center bg-violet-400 rounded-md cursor-pointer shadow-md shadow-[#5865f28a] hover:bg-violet-500 ease-linear duration-200">
+            <i className="p-2">
+              <img
+                src="/maps-icon.png"
+                width="50px"
+                height="50px"
+                alt="maps icon"
+              />
+            </i>
+            <p className="m-2 text-white text-md font-regular">{gallery}</p>
+          </div>
+
+          {user === userId && (
+            <div className="flex flex-row">
+              <button
+                className="md:m-2 m-auto mt-8 bg-violet-500 shadow-md shadow-[#5865f28a]  py-2 px-6 rounded-xl  hover:bg-violet-600 ease-linear duration-200"
+                onClick={goToEdit}
+              >
+                <span className="text-white text-md font-semibold">Edit</span>
+              </button>
+              <button
+                className="md:m-2 m-auto mt-8 bg-red-600 shadow-md shadow-[#5865f28a]  py-2 px-6 rounded-xl  hover:bg-red-700 ease-linear duration-200"
+                onClick={() => dispatch(showConfirmationDeletePost(deletePost))}
+              >
+                <span className="text-white text-md font-semibold">Delete</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
-
-      <div className=" h-full w-full mr-2 rounded-2xl ">
-        <p className="m-2 font-bold pl-1 text-lg text-[#5865F2]">Advanced</p>
-        <h1 className="m-2 text-4xl font-bold dark:text-white">
-          React Native with TypeScript tutorial.
-        </h1>
-
-        <div className=" pt-16 pr-2 pl-2 flex flex-row justify-around flex-wrap">
-          <div className="flex flex-row items-center m-2">
-            <FaReact size={20} color="#61DBFB" />
-            <h1 className="pl-1 dark:text-white">React Native</h1>
-          </div>
-          <div className="flex flex-row items-center m-2">
-            <SiTypescript size={20} color="#007acc" />
-            <h1 className="pl-1 dark:text-white">TypeScript</h1>
-          </div>
-          <div className="flex flex-row items-center m-2">
-            <AiOutlineClockCircle size={20} className="dark:text-white" />
-            <h1 className="pl-1 dark:text-white">32 Hour</h1>
-          </div>
-          <div className="flex flex-row items-center m-2">
-            <VscChecklist size={20} className="dark:text-white" />
-            <h1 className="pl-1 dark:text-white">5 Part</h1>
-          </div>
-        </div>
-
-        <div className="flex flex-row">
-          <button className="md:m-2 m-auto mt-8 bg-[#5865F2] shadow-md shadow-[#5865f28a]  pt-2 pb-2 pl-6 pr-4 rounded-xl flex flex-row justify-center items-center hover:bg-[#424bb6] ease-linear duration-300">
-            <FaPlay className="animate-ping" size={10} color="#fff" />
-            <h1 className="text-white text-md font-semibold pl-2">
-              Start Learning Now
-            </h1>
-          </button>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

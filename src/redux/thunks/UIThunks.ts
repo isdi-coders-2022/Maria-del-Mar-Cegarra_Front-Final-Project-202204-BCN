@@ -13,7 +13,7 @@ export const dispatchCloseUI = (dispatch: AppDispatch) => {
 export const showAdviseThunk =
   (header: string, body: string) => (dispatch: AppDispatch) => {
     dispatch(showAdviseActionCreator({ header, body }));
-    setTimeout(dispatchCloseUI, 5000);
+    setTimeout(() => dispatch(closeUIActionCreator), 5000);
   };
 
 export const showErrorThunk =
@@ -24,4 +24,11 @@ export const showErrorThunk =
 export const showConfirmationThunk =
   (header: string, body: string) => (dispatch: AppDispatch) => {
     dispatch(showConfirmationActionCreator({ header, body }));
+  };
+
+export const showConfirmationDeletePost =
+  (action: Function) => (dispatch: AppDispatch) => {
+    const header = "Are you sure you want to delete this post?";
+    const body = "Changes cannot be reversed";
+    dispatch(showConfirmationActionCreator({ header, body, action }));
   };

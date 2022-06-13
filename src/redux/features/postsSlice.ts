@@ -23,6 +23,10 @@ export const postsSlice = createSlice({
       ...posts,
       publicPosts: [...posts.publicPosts, ...action.payload],
     }),
+    loadUserPosts: (posts, action: PayloadAction<Posts>) => ({
+      ...posts,
+      userPosts: [...posts.userPosts, ...action.payload],
+    }),
     deletePost: (posts, action: PayloadAction<Id>) => ({
       ...posts,
       publicPosts: posts.publicPosts.filter(
@@ -39,6 +43,7 @@ export const postsSlice = createSlice({
 
 export const {
   loadPublicPosts: loadPublicPostsActionCreator,
+  loadUserPosts: loadUserPostsActionCreator,
   deletePost: deletePostActionCreator,
   createPost: createPostActionCreator,
 } = postsSlice.actions;

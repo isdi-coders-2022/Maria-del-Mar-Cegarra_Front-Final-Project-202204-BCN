@@ -6,12 +6,12 @@ import {
   RegisterFormData,
   UserState,
 } from "../../types/UserTypes";
-import { loginActionCreator } from "../features/userSlice";
 import { showAdviseThunk, showErrorThunk } from "./UIThunks";
 import {
   closeUIActionCreator,
   showLoadingActionCreator,
-} from "../features/UISlice";
+} from "../features/UISlice/UISlice";
+import { loginActionCreator } from "../features/userSlice/userSlice";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 

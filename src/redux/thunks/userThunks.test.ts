@@ -16,7 +16,7 @@ import {
   mockUserStateLogged,
   mockWrongUserDataRegister,
 } from "../../mocks/userMocks";
-import { loginActionCreator } from "../features/userSlice";
+import { loginActionCreator } from "../features/userSlice/userSlice";
 
 jest.mock("jwt-decode", () => () => mockTokenUserData);
 

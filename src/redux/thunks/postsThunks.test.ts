@@ -5,7 +5,8 @@ import {
   createPostActionCreator,
   deletePostActionCreator,
   loadPublicPostsActionCreator,
-} from "../features/postsSlice";
+} from "../features/postsSlice/postsSlice";
+
 import {
   createPostThunk,
   deletePostThunk,

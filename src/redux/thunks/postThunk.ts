@@ -1,12 +1,12 @@
 import axios from "axios";
 import { IPost } from "../../types/PostTypes";
 import { loadPostActionCreator } from "../features/postSlice/postSlice";
-import { editPostActionCreator } from "../features/postsSlice";
-
+import { editPostActionCreator } from "../features/postsSlice/postsSlice";
 import {
   closeUIActionCreator,
   showLoadingActionCreator,
-} from "../features/UISlice";
+} from "../features/UISlice/UISlice";
+
 import { AppDispatch } from "../store/store";
 import { showAdviseThunk, showErrorThunk } from "./UIThunks";
 

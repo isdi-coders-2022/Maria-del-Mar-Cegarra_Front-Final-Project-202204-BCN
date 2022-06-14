@@ -3,7 +3,7 @@ import {
   showAdviseActionCreator,
   showConfirmationActionCreator,
   showErrorActionCreator,
-} from "../features/UISlice";
+} from "../features/UISlice/UISlice";
 import {
   dispatchCloseUI,
   showAdviseThunk,

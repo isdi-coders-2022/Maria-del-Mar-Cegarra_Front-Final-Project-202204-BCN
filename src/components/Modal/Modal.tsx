@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { closeUIActionCreator } from "../../redux/features/UISlice";
+import { closeUIActionCreator } from "../../redux/features/UISlice/UISlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import CheckIcon from "../Icons/CheckIcon";
 import ErrorIcon from "../Icons/ErrorIcon";

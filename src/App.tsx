@@ -3,7 +3,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import CredentialsValidation from "./components/CredentialsValidation/CredentialsValidation";
 import Modal from "./components/Modal/Modal";
 import Navigation from "./components/Navigation/Navigation";
-import Spinner from "./pages/LoadingPage/LoadingPage";
 import AddPostPage from "./pages/AddPostPage/AddPostPage";
 import DetailPostPage from "./pages/DetailPostPage/DetailPostPage";
 import EditPostPage from "./pages/EditPostPage/EditPostPage";
@@ -11,9 +10,9 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import { loginActionCreator } from "./redux/features/userSlice";
 import { useAppDispatch } from "./redux/hooks/hooks";
 import { UserData } from "./types/UserTypes";
+import { loginActionCreator } from "./redux/features/userSlice/userSlice";
 
 function App() {
   const dispatch = useAppDispatch();

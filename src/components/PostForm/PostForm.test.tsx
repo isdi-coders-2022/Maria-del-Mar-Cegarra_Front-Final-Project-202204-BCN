@@ -6,9 +6,17 @@ import { store } from "../../redux/store/store";
 import PostForm from "./PostForm";
 
 const mockDispatch = jest.fn();
+
 jest.mock("../../redux/hooks/hooks", () => ({
   ...jest.requireActual("../../redux/hooks/hooks"),
   useAppDispatch: () => mockDispatch,
+}));
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useLocation: () => ({
+    pathname: "/add-post",
+  }),
 }));
 
 describe("Given the PostForm component", () => {
@@ -55,6 +63,7 @@ describe("Given the PostForm component", () => {
         type: "application/JSON",
       });
       global.URL.createObjectURL = jest.fn();
+
       test("And render an image and a delete button when clicked", async () => {
         render(
           <BrowserRouter>

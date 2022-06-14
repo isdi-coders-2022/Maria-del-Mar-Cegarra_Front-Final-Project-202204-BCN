@@ -1,3 +1,4 @@
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
@@ -24,9 +25,18 @@ describe("Given the DetailPost component", () => {
     test("Then it should render 3 images", () => {
       const expectedNumberImages = 3;
 
+      const userMockSlice = createSlice({
+        name: "user",
+        initialState: { id: "2323", name: "pepe", username: "pepe" },
+        reducers: {},
+      });
+      const mockStore = configureStore({
+        reducer: { user: userMockSlice.reducer },
+      });
+
       render(
         <BrowserRouter>
-          <Provider store={store}>
+          <Provider store={mockStore}>
             <PostDetails post={mockPosts[0]} />
           </Provider>
         </BrowserRouter>
@@ -41,9 +51,18 @@ describe("Given the DetailPost component", () => {
       const expectedImage =
         "https://maria-del-mar-cegarra-back-final-project.onrender.com/uploads/Picture 1";
       const expectedAlt = "Post";
+      const userMockSlice = createSlice({
+        name: "user",
+        initialState: { id: "2323", name: "pepe", username: "pepe" },
+        reducers: {},
+      });
+      const mockStore = configureStore({
+        reducer: { user: userMockSlice.reducer },
+      });
+
       render(
         <BrowserRouter>
-          <Provider store={store}>
+          <Provider store={mockStore}>
             <PostDetails post={mockPosts[0]} />
           </Provider>
         </BrowserRouter>
@@ -58,9 +77,18 @@ describe("Given the DetailPost component", () => {
   describe("When its invoked and the id of the user owner of the post matches with the id of the user logged", () => {
     test("Then it should render a button 'Edit' and call dispatch when clicked", () => {
       const expectedButton = "Edit";
+      const userMockSlice = createSlice({
+        name: "user",
+        initialState: { id: "2323", name: "pepe", username: "pepe" },
+        reducers: {},
+      });
+      const mockStore = configureStore({
+        reducer: { user: userMockSlice.reducer },
+      });
+
       render(
         <BrowserRouter>
-          <Provider store={store}>
+          <Provider store={mockStore}>
             <PostDetails post={mockPosts[0]} />
           </Provider>
         </BrowserRouter>
@@ -74,9 +102,18 @@ describe("Given the DetailPost component", () => {
 
     test("Then it should render a button 'Delete' and call dispatch when clicked", () => {
       const expectedButton = "Delete";
+      const userMockSlice = createSlice({
+        name: "user",
+        initialState: { id: "2323", name: "pepe", username: "pepe" },
+        reducers: {},
+      });
+      const mockStore = configureStore({
+        reducer: { user: userMockSlice.reducer },
+      });
+
       render(
         <BrowserRouter>
-          <Provider store={store}>
+          <Provider store={mockStore}>
             <PostDetails post={mockPosts[0]} />
           </Provider>
         </BrowserRouter>

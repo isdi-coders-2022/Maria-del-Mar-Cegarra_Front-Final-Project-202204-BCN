@@ -56,7 +56,7 @@ const PostDetails = ({
                   alt="profilepic"
                 />
               </div>
-              <span className="py-3 ml-5 font-bold text-xl">{name}</span>
+              <h1 className="py-3 ml-5 font-bold text-xl">{name}</h1>
               <span className="px-2 hover:bg-gray-300 cursor-pointer rounded">
                 <i className="fas fa-ellipsis-h pt-2 text-lg"></i>
               </span>

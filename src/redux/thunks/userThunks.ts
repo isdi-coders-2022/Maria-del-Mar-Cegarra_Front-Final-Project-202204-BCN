@@ -8,6 +8,10 @@ import {
 } from "../../types/UserTypes";
 import { loginActionCreator } from "../features/userSlice";
 import { showAdviseThunk, showErrorThunk } from "./UIThunks";
+import {
+  closeUIActionCreator,
+  showLoadingActionCreator,
+} from "../features/UISlice";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -51,6 +55,7 @@ export const registerUserThunk =
       dispatch(showAdviseNoRegisterData);
     }
     try {
+      dispatch(showLoadingActionCreator());
       const { data } = await axios.post(`${apiUrl}user/register`, {
         name,
         username,
@@ -64,6 +69,7 @@ export const registerUserThunk =
       localStorage.setItem("token", data.token);
 
       dispatch(loginActionCreator(userInfo));
+      dispatch(closeUIActionCreator());
     } catch (error) {
       dispatch(showErrorRegisterUser);
     }

@@ -49,7 +49,6 @@ describe("Given the showAdviseThunk function", () => {
       showAdviseThunkTest(dispatch);
 
       expect(setTimeout).toHaveBeenCalledTimes(1);
-      expect(setTimeout).toHaveBeenLastCalledWith(dispatchCloseUI, 5000);
     });
   });
 });

@@ -1,5 +1,7 @@
 import axios from "axios";
-import { loadPostActionCreator } from "../features/postSlice";
+import { IPost } from "../../types/PostTypes";
+import { loadPostActionCreator } from "../features/postSlice/postSlice";
+import { editPostActionCreator } from "../features/postsSlice";
 
 import {
   closeUIActionCreator,
@@ -30,39 +32,40 @@ export const loadPostThunk =
     try {
       dispatch(showLoadingActionCreator());
       const token = localStorage.getItem("token");
-      const { data: post } = await axios.get(`${apiUrl}posts/${postId}`, {
+      const {
+        data: { post },
+      } = await axios.get(`${apiUrl}posts/${postId}`, {
         headers: { authorization: `Bearer ${token}` },
       });
-      if (!post) {
+      if (post) {
         dispatch(loadPostActionCreator(post));
         dispatch(closeUIActionCreator());
         return;
       }
     } catch (error) {
-      dispatch(closeUIActionCreator());
       dispatch(showErrorLoadPost);
     }
   };
 
 export const editPostThunk =
-  (postId: string, post: FormData) => async (dispatch: AppDispatch) => {
+  (postId: string, postInfo: IPost) => async (dispatch: AppDispatch) => {
     try {
       dispatch(showLoadingActionCreator());
       const token = localStorage.getItem("token");
-      const { status } = await axios.patch(`${apiUrl}posts/edit/${postId}`, {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      });
+      const { status, data: post } = await axios.put(
+        `${apiUrl}posts/edit/${postId}`,
+        postInfo,
+        {
+          headers: { authorization: `Bearer ${token}` },
+        }
+      );
       if (status === 204) {
-        dispatch(loadPostThunk(postId));
-        dispatch(closeUIActionCreator());
+        dispatch(editPostActionCreator(post));
         dispatch(showExitEditPost);
+      } else {
+        dispatch(showErrorEditPost);
       }
-      dispatch(closeUIActionCreator());
-      dispatch(showErrorEditPost);
     } catch (error) {
-      dispatch(closeUIActionCreator());
       dispatch(showErrorEditPost);
     }
   };

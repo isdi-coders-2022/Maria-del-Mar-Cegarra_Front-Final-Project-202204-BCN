@@ -6,13 +6,12 @@ import { loadPublicPostsThunk } from "../../redux/thunks/postsThunks";
 const HomePage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const posts = useAppSelector((state) => state.posts.publicPosts);
-
-  const pageSize = 10;
-  const page = 2;
+  const { publicPostsPage } = useAppSelector((state) => state.pagination);
 
   useEffect(() => {
-    dispatch(loadPublicPostsThunk(pageSize, page));
-  }, [dispatch, page, pageSize]);
+    const pageSize = 10;
+    dispatch(loadPublicPostsThunk(pageSize, publicPostsPage));
+  }, [dispatch, publicPostsPage]);
 
   return (
     <div className="backdrop-blur-md absolute border rounded-3xl content-center inset-x-0 bottom-0 top-16">

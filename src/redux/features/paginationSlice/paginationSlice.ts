@@ -22,6 +22,14 @@ export const paginationSlice = createSlice({
       ...initialState,
       userPostsPage: pagination.userPostsPage + 1,
     }),
+    goToStartPublicPosts: (pagination) => ({
+      ...pagination,
+      publicPostsPage: 1,
+    }),
+    goToStartUserPosts: (pagination) => ({
+      ...pagination,
+      userPostsPage: 1,
+    }),
   },
 });
 
@@ -30,4 +38,6 @@ export default paginationSlice.reducer;
 export const {
   loadMorePublicPosts: loadMorePublicPostsActionCreator,
   loadMoreUserPosts: loadMoreUserPostsActionCreator,
+  goToStartPublicPosts: goToStartPublicPostsActionCreator,
+  goToStartUserPosts: goToStartUserPostsActionCreator,
 } = paginationSlice.actions;

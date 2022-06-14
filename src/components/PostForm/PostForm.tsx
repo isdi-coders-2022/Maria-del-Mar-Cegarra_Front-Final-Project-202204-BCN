@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks/hooks";
 import { createPostThunk } from "../../redux/thunks/postsThunks";
 import { editPostThunk } from "../../redux/thunks/postThunk";
@@ -20,6 +20,7 @@ interface Props {
 const PostForm = ({ postId }: Props): JSX.Element => {
   const [formData, setFormData] = useState<FormPost>(blankData);
   const postInfo = useAppSelector((state) => state.post);
+  const { pathname } = useLocation();
   const { id } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -122,29 +123,37 @@ const PostForm = ({ postId }: Props): JSX.Element => {
                 alt="Your uploads"
                 className="max-w-full max-h-64"
               />
-              <button
-                data-testid="Delete"
-                className="absolute top-0 right-2.5 my-2 p-2.5 w-50 text-sm text-gray-900 bg-violet-400 hover:bg-violet-500 rounded-full border border-gray-300 focus-border-input"
-                onClick={removeSelectedImage}
-              >
-                <CrossIcon color="text-slate-900" />
-              </button>
+              {pathname === "/add-post" && (
+                <button
+                  data-testid="Delete"
+                  className="absolute top-0 right-2.5 my-2 p-2.5 w-50 text-sm text-gray-900 bg-violet-400 hover:bg-violet-500 rounded-full border border-gray-300 focus-border-input"
+                  onClick={removeSelectedImage}
+                >
+                  <CrossIcon color="text-slate-900" />
+                </button>
+              )}
             </>
           )}
         </div>
-        <label htmlFor="picture" hidden={true}>
-          Picture
-        </label>
-        <input
-          type="file"
-          id="picture"
-          className="block center my-2.5 p-2.5 w-full text-sm text-gray-900 bg-violet-300 hover:bg-violet-500 rounded-lg border border-gray-300 focus-border-input file:mr-4 file:py-2 file:px-4
+        <>
+          {pathname === "/add-post" && (
+            <>
+              <label htmlFor="picture" hidden={true}>
+                Picture
+              </label>
+              <input
+                type="file"
+                id="picture"
+                className="block center my-2.5 p-2.5 w-full text-sm text-gray-900 bg-violet-300 hover:bg-violet-500 rounded-lg border border-gray-300 focus-border-input file:mr-4 file:py-2 file:px-4
         file:rounded-full file:border-0
         file:text-sm file:font-semibold
         file:bg-violet-50 file:text-violet-700
         hover:file:bg-violet-100"
-          onChange={changeFormData}
-        ></input>
+                onChange={changeFormData}
+              ></input>
+            </>
+          )}
+        </>
         <label htmlFor="caption" hidden={true}>
           Caption
         </label>

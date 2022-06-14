@@ -89,6 +89,7 @@ const PostForm = ({ postId }: Props): JSX.Element => {
       ? dispatch(editPostThunk(postId, newFormData as unknown as IPost))
       : dispatch(createPostThunk(newFormData as unknown as IPost));
     navigate("/home");
+    clearData();
   };
 
   const apiUrl = process.env.REACT_APP_API_URL;

@@ -1,15 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 import paginationReducer from "../features/paginationSlice/paginationSlice";
 import postReducer from "../features/postSlice/postSlice";
-import postsReducer from "../features/postsSlice";
-import UIReducer from "../features/UISlice";
-import userReducer from "../features/userSlice";
+import postsSlice from "../features/postsSlice/postsSlice";
+import UISlice from "../features/UISlice/UISlice";
+import userSlice from "../features/userSlice/userSlice";
 
 export const store = configureStore({
   reducer: {
-    user: userReducer,
-    ui: UIReducer,
-    posts: postsReducer,
+    user: userSlice,
+    ui: UISlice,
+    posts: postsSlice,
     post: postReducer,
     pagination: paginationReducer,
   },

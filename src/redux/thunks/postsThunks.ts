@@ -5,11 +5,12 @@ import {
   deletePostActionCreator,
   loadPublicPostsActionCreator,
   loadUserPostsActionCreator,
-} from "../features/postsSlice";
+} from "../features/postsSlice/postsSlice";
 import {
   closeUIActionCreator,
   showLoadingActionCreator,
-} from "../features/UISlice";
+} from "../features/UISlice/UISlice";
+
 import { AppDispatch } from "../store/store";
 import { showAdviseThunk, showErrorThunk } from "./UIThunks";
 

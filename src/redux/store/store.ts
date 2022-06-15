@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import loadingSlice from "../features/loadingSlice/loadingSlice";
 import paginationReducer from "../features/paginationSlice/paginationSlice";
 import postReducer from "../features/postSlice/postSlice";
 import postsSlice from "../features/postsSlice/postsSlice";
@@ -12,6 +13,7 @@ export const store = configureStore({
     posts: postsSlice,
     post: postReducer,
     pagination: paginationReducer,
+    loading: loadingSlice,
   },
 });
 

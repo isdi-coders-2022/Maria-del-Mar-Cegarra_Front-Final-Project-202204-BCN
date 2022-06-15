@@ -159,6 +159,7 @@ describe("Given the selectPost function", () => {
           publicPostsPage: 1,
           userPostsPage: 1,
         },
+        loading: false,
       };
 
       const postsState = selectPost(state);

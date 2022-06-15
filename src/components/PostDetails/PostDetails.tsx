@@ -22,7 +22,6 @@ const PostDetails = ({
     likes,
   },
 }: Props): JSX.Element => {
-  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { id: loggedUserId } = useAppSelector((state) => state.user);

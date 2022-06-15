@@ -2,7 +2,6 @@ import { useAppSelector } from "../../redux/hooks/hooks";
 
 const Loading = (): JSX.Element => {
   const isLoading = useAppSelector((state) => state.loading);
-  debugger;
   return (
     <>
       {isLoading && (

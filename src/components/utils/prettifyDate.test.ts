@@ -2,11 +2,11 @@ import prettifyDate from "./prettifyDate";
 
 describe("Given the prettifyDate function", () => {
   describe("When it receives a date from 10s ago", () => {
-    test("Then it should return '10 seconds ago'", () => {
+    test("Then it should return 'Less than a minute ago'", () => {
       var postDate = new Date(Date.now());
       postDate.setSeconds(postDate.getSeconds() - 10);
       const postDateString = postDate.toString();
-      const expectedDateString = "10 seconds ago";
+      const expectedDateString = "Less than a minute ago";
 
       const datePrettified = prettifyDate(postDateString);
 

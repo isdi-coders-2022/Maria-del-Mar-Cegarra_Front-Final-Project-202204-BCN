@@ -11,7 +11,7 @@ const prettifyDate = (date: string) => {
   const hours = timeDiff / 1000 / 60 / 60;
   const days = timeDiff / 1000 / 60 / 60 / 24;
 
-  const secondsPretty = `${Math.round(seconds)} seconds ago`;
+  const secondsPretty = "Less than a minute ago";
   const minutesPretty = `${Math.round(minutes)} minutes ago`;
   const hoursPretty = `${Math.round(hours)} hours ago`;
   const daysPretty = `${Math.round(days)} days ago`;

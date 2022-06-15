@@ -106,25 +106,6 @@ describe("Given the uiSlice function", () => {
     });
   });
 
-  describe("When it receives the showLoading", () => {
-    test("Then it should return type: 'loading', body: '' and header: ''", () => {
-      const initialState: UIState = {
-        type: "",
-        header: "",
-        body: "",
-      };
-      const expectedUIState = {
-        type: "loading",
-        header: "",
-        body: "",
-      };
-
-      const currentState = UISlice(initialState, showLoadingActionCreator());
-
-      expect(currentState).toEqual(expectedUIState);
-    });
-  });
-
   describe("When it receives the closeUI", () => {
     test("Then it should return type: '' , body: '' and header: ''", () => {
       const action = () => {};

@@ -1,11 +1,11 @@
 import axios from "axios";
 import { IPost } from "../../types/PostTypes";
+import {
+  notShowLoadingActionCreator,
+  showLoadingActionCreator,
+} from "../features/loadingSlice/loadingSlice";
 import { loadPostActionCreator } from "../features/postSlice/postSlice";
 import { editPostActionCreator } from "../features/postsSlice/postsSlice";
-import {
-  closeUIActionCreator,
-  showLoadingActionCreator,
-} from "../features/UISlice/UISlice";
 
 import { AppDispatch } from "../store/store";
 import { showAdviseThunk, showErrorThunk } from "./UIThunks";
@@ -39,7 +39,9 @@ export const loadPostThunk =
       });
       if (post) {
         dispatch(loadPostActionCreator(post));
-        dispatch(closeUIActionCreator());
+        setTimeout(() => {
+          dispatch(notShowLoadingActionCreator());
+        }, 3000);
         return;
       }
     } catch (error) {

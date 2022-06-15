@@ -40,8 +40,8 @@ const PostDetails = ({
 
   return (
     <>
-      <div className="flex items-center justify-center">
-        <div className="lg:w-8/12 md:w-10/12 p-4 rounded-2xl bg-violet-200 shadow-lg  flex flex-col ease-linear duration-200 md:flex-row">
+      <div className=" transition-all flex items-center justify-center pt-10">
+        <div className="w-screen lg:w-8/12 md:w-10/12 p-4 rounded-2xl bg-violet-200 shadow-lg  flex flex-col ease-linear duration-200 md:flex-row">
           <div className="relative">
             <div className="flex my-2">
               <div className="rounded-full h-16 w-16 bg-gray-500 flex items-center justify-center overflow-hidden">

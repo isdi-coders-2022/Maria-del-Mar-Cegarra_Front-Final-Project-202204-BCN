@@ -15,7 +15,7 @@ const DetailPostPage = (): JSX.Element => {
 
   return (
     <>
-      <div className="flex items-center backdrop-blur-md absolute border rounded-3xl content-center inset-x-0 bottom-0 top-16">
+      <div className="backdrop-blur-md relative min-h-screen border rounded-3xl content-center inset-x-0 bottom-0 top-16 mb-40">
         <PostDetails post={post} />
       </div>
     </>

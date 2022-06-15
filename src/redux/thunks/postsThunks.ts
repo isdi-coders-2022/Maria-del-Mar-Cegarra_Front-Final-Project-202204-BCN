@@ -124,14 +124,16 @@ export const createPostThunk =
     try {
       dispatch(showLoadingActionCreator());
       const token = window.localStorage.getItem("token");
-      const { data } = await axios.post(`${apiUrl}posts/create`, newPost, {
+      const {
+        data: { post },
+      } = await axios.post(`${apiUrl}posts/create`, newPost, {
         headers: { authorization: `Bearer ${token}` },
       });
-      if (!data) {
+      if (!post) {
         dispatch(showErrorCreatePost);
         return;
       }
-      dispatch(createPostActionCreator(newPost));
+      dispatch(createPostActionCreator(post));
       dispatch(showExitCreatePost);
     } catch (error) {
       dispatch(showErrorCreatePost);

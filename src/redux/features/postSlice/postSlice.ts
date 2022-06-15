@@ -6,13 +6,14 @@ const initialState: IPost = {
   caption: "",
   hashtags: [],
   date: "",
+  likes: 0,
+  comments: 0,
+  pictureBackup: "",
   gallery: {
     name: "",
     location: "",
     id: "",
   },
-  likes: 0,
-  comments: 0,
   user: {
     id: "",
     name: "",
@@ -20,7 +21,6 @@ const initialState: IPost = {
     profilePic: "",
     profilePicBackup: "",
   },
-  pictureBackup: "",
 };
 
 export const postSlice = createSlice({

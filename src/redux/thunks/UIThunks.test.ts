@@ -7,6 +7,7 @@ import {
 import {
   dispatchCloseUI,
   showAdviseThunk,
+  showConfirmationDeletePost,
   showConfirmationThunk,
   showErrorThunk,
 } from "./UIThunks";
@@ -79,6 +80,26 @@ describe("Given the shoConfirmationThunk function", () => {
       const expectedAction = showConfirmationActionCreator({ header, body });
 
       showConfirmationThunkTest(dispatch);
+
+      expect(dispatch).toHaveBeenCalledWith(expectedAction);
+    });
+  });
+});
+
+describe("Given the showConfirmationDeletePost", () => {
+  describe("When it receives an action", () => {
+    test("Then dispatch should've been called with showConfirmationError with header, body and and the action received by payload", () => {
+      const action = () => {};
+      const expectedPayload = {
+        header: "Are you sure you want to delete this post?",
+        body: "Changes cannot be reversed",
+        action,
+      };
+      const dispatch = jest.fn();
+      const showConfirmationDeletePostTest = showConfirmationDeletePost(action);
+      const expectedAction = showConfirmationActionCreator(expectedPayload);
+
+      showConfirmationDeletePostTest(dispatch);
 
       expect(dispatch).toHaveBeenCalledWith(expectedAction);
     });

@@ -17,7 +17,7 @@ const ProfilePage = (): JSX.Element => {
   return (
     <div className="flex justify-center transition-all">
       <div className="backdrop-blur-md relative md:w-8/12 lg:w-8/12 border rounded-3xl center content-center bottom-0 top-16 mb-40">
-        <h1 className="text-6xl m-4 font-semibold">Explore</h1>
+        <h1 className="text-6xl m-4 font-semibold">Profile Page</h1>
         <PostsList posts={profilePosts} />
       </div>
     </div>

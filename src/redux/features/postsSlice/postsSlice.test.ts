@@ -1,5 +1,6 @@
 import { mockPosts } from "../../../mocks/postMocks";
 import { RootState } from "../../store/store";
+import { editUserActionCreator } from "../userSlice/userSlice";
 import postsSlice, {
   selectPost,
   createPostActionCreator,
@@ -7,6 +8,7 @@ import postsSlice, {
   loadPublicPostsActionCreator,
   loadUserPostsActionCreator,
   PostsState,
+  editPostActionCreator,
 } from "./postsSlice";
 
 describe("Given the postsSlice function", () => {
@@ -112,6 +114,32 @@ describe("Given the postsSlice function", () => {
       );
 
       expect(currentState).toEqual(expectedPublicPosts);
+    });
+  });
+
+  describe("When it receives the previus state and editPostActionCreator with '2323'", () => {
+    test("Then it should return th previous state without the post with id '2323'", () => {
+      const postEdit = {
+        ...mockPosts[0],
+        caption: "mockcaption",
+        hashtags: ["#hasChanged"],
+      };
+      const previusState: PostsState = {
+        publicPosts: [mockPosts[0], mockPosts[1]],
+        userPosts: [mockPosts[0], mockPosts[1]],
+      };
+      const expectedPostsState = {
+        ...previusState,
+        publicPosts: [postEdit, mockPosts[1]],
+        userPosts: [postEdit, mockPosts[1]],
+      };
+
+      const currentState = postsSlice(
+        previusState,
+        editPostActionCreator(postEdit)
+      );
+
+      expect(currentState).toEqual(expectedPostsState);
     });
   });
 });

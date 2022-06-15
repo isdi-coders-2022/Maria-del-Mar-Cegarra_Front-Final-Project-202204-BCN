@@ -5,12 +5,14 @@ import {
   createPostActionCreator,
   deletePostActionCreator,
   loadPublicPostsActionCreator,
+  loadUserPostsActionCreator,
 } from "../features/postsSlice/postsSlice";
 
 import {
   createPostThunk,
   deletePostThunk,
   loadPublicPostsThunk,
+  loadUserPostsThunk,
   showAdviseLoadPublicPosts,
   showErrorCreatePost,
   showErrorDeletePost,
@@ -71,6 +73,96 @@ describe("Given the loadPublicThunks function", () => {
       axios.get = jest.fn().mockResolvedValue(mockAxiosReturn);
 
       await loadPublicPostsThunkTest(dispatch);
+
+      expect(dispatch).toHaveBeenCalledWith(expectedAction);
+    });
+  });
+
+  describe("When it receives an error from api", () => {
+    test("Then it should call dispatch with loadPublicPostsActionCreator", async () => {
+      const mockAxiosReturn = new Error();
+      const dispatch = jest.fn();
+      const loadPublicPostsThunkTest = loadPublicPostsThunk(2, 10);
+      const expectedAction = showErrorLoadPublicPosts;
+      axios.get = jest.fn().mockResolvedValue(mockAxiosReturn);
+
+      await loadPublicPostsThunkTest(dispatch);
+
+      expect(dispatch).toHaveBeenCalledWith(expectedAction);
+    });
+  });
+});
+
+describe("Given the loadUserPostsThunk function", () => {
+  describe("When it receives a user ID 2 and 2", () => {
+    test("Then it should call dispatch with loadPublicPostsActionCreator", async () => {
+      const userId = "2323";
+      const expectedPosts = [mockPosts[2], mockPosts[3]];
+      const mockAxiosReturn: AxiosPostsReturn = {
+        status: 200,
+        data: {
+          posts: expectedPosts,
+        },
+      };
+      const dispatch = jest.fn();
+      const loadUserPostsThunkTest = loadUserPostsThunk(userId, 2, 2);
+      const expectedAction = loadUserPostsActionCreator(expectedPosts);
+      axios.get = jest.fn().mockResolvedValue(mockAxiosReturn);
+
+      await loadUserPostsThunkTest(dispatch);
+
+      expect(dispatch).toHaveBeenCalledWith(expectedAction);
+    });
+  });
+
+  describe("When it receives 2 and 10", () => {
+    test("Then it should call dispatch with loadPublicPostsActionCreator", async () => {
+      const userId = "2323";
+      const mockAxiosReturn: AxiosPostsReturn = {
+        status: 200,
+        data: {
+          posts: [],
+        },
+      };
+      const dispatch = jest.fn();
+      const loadUserPostsThunkTest = loadUserPostsThunk(userId, 2, 10);
+      const expectedAction = showAdviseLoadPublicPosts;
+      axios.get = jest.fn().mockResolvedValue(mockAxiosReturn);
+
+      await loadUserPostsThunkTest(dispatch);
+
+      expect(dispatch).toHaveBeenCalledWith(expectedAction);
+    });
+  });
+
+  describe("When it receives no data from call to api", () => {
+    test("Then it should call dispatch with loadPublicPostsActionCreator", async () => {
+      const userId = "2323";
+      const mockAxiosReturn: AxiosPostsReturn = {
+        status: 200,
+        data: null,
+      };
+      const dispatch = jest.fn();
+      const loadUserPostsThunkTest = loadUserPostsThunk(userId, 2, 10);
+      const expectedAction = showErrorLoadPublicPosts;
+      axios.get = jest.fn().mockResolvedValue(mockAxiosReturn);
+
+      await loadUserPostsThunkTest(dispatch);
+
+      expect(dispatch).toHaveBeenCalledWith(expectedAction);
+    });
+  });
+
+  describe("When it receives an error from api", () => {
+    test("Then it should call dispatch with loadPublicPostsActionCreator", async () => {
+      const userId = "2323";
+      const mockAxiosReturn = new Error();
+      const dispatch = jest.fn();
+      const loadUserPostsThunkTest = loadUserPostsThunk(userId, 2, 10);
+      const expectedAction = showErrorLoadPublicPosts;
+      axios.get = jest.fn().mockResolvedValue(mockAxiosReturn);
+
+      await loadUserPostsThunkTest(dispatch);
 
       expect(dispatch).toHaveBeenCalledWith(expectedAction);
     });

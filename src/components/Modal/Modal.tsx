@@ -48,6 +48,9 @@ const Modal = (): JSX.Element => {
     if (checkModalOpen(type)) {
       setModalOpen(true);
     }
+    if (!checkModalOpen(type)) {
+      setModalOpen(false);
+    }
   }, [dispatch, type]);
 
   const styles: Styles = {

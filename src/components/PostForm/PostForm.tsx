@@ -85,7 +85,6 @@ const PostForm = ({ postId }: Props): JSX.Element => {
     newFormData.append("gallery", formData.galleryId);
     newFormData.append("picture", formData.picture);
     newFormData.append("userId", id);
-    debugger;
     postId
       ? dispatch(editPostThunk(postId, newFormData as unknown as IPost))
       : dispatch(createPostThunk(newFormData as unknown as IPost));

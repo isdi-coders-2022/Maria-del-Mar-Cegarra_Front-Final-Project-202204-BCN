@@ -12,7 +12,7 @@ const CredentialsValidation = ({ children }: Props) => {
   const { pathname } = useLocation();
 
   useEffect((): any => {
-    if (!logged) {
+    if (!logged && !["/login", "/register"].includes(pathname)) {
       navigate("/login");
     } else {
       if (["/login", "/register"].includes(pathname)) {

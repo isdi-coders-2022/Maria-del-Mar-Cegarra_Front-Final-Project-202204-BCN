@@ -33,17 +33,12 @@ const Post = ({
     navigate(`/post/${id}`);
   };
 
-  const apiUrl = process.env.REACT_APP_API_URL;
-
   return (
     <div className="transition-all rounded overflow-hidden border w-screen lg:w-8/12 md:w-10/12 bg-violet-200 my-8">
       <div className="w-full flex justify-between p-3">
         <div className="flex">
           <div className="rounded-full h-16 w-16 bg-gray-500 flex items-center justify-center overflow-hidden">
-            <img
-              src={`${apiUrl}uploads/${profilePicBackup}`}
-              alt="profilepic"
-            />
+            <img src="/images/profilePic.png" alt="profilepic" />
           </div>
           <span className="py-3 ml-5 font-bold text-2xl">{name}</span>
         </div>
@@ -66,7 +61,7 @@ const Post = ({
         onClick={goToDetails}
         className="w-full bg-cover"
         alt={caption}
-        src={`${apiUrl}uploads/${pictureBackup}`}
+        src={pictureBackup}
       />
       <div className="px-3 pb-2">
         <div className="pt-2">

@@ -13,17 +13,15 @@ interface Props {
 const PostDetails = ({
   post: {
     id,
-    user: { id: userId, name, username, profilePic, profilePicBackup },
-    picture,
+    user: { id: userId, name, username },
     caption,
     date,
     pictureBackup,
-    gallery: { name: galleryName, location },
+    gallery: { name: galleryName },
     comments,
     likes,
   },
 }: Props): JSX.Element => {
-  const apiUrl = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { id: loggedUserId } = useAppSelector((state) => state.user);
@@ -45,10 +43,7 @@ const PostDetails = ({
           <div className="relative">
             <div className="flex my-2">
               <div className="rounded-full h-16 w-16 bg-gray-500 flex items-center justify-center overflow-hidden">
-                <img
-                  src={`${apiUrl}uploads/${profilePicBackup}`}
-                  alt="profilepic"
-                />
+                <img src="/images/profilePic.png" alt="profilepic" />
               </div>
               <h1 className="py-3 ml-5 font-bold text-xl">{name}</h1>
               <span className="px-2 hover:bg-gray-300 cursor-pointer rounded">
@@ -57,11 +52,7 @@ const PostDetails = ({
             </div>
             <div className="w-full shadow-md rounded-2xl relative">
               <div className="w-full relative rounded-2xl">
-                <img
-                  src={`${apiUrl}uploads/${pictureBackup}`}
-                  alt="Post"
-                  className=" rounded-2xl"
-                />
+                <img src={pictureBackup} alt="Post" className=" rounded-2xl" />
               </div>
             </div>
           </div>

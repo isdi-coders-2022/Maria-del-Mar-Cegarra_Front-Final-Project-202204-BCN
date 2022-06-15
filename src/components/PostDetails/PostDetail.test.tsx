@@ -37,39 +37,22 @@ describe("Given the DetailPost component", () => {
       expect(images).toHaveLength(expectedNumberImages);
     });
 
-    test("Then the image of the first image should have src 'Picture 1.jpg'", () => {
-      const expectedImage =
-        "https://maria-del-mar-cegarra-back-final-project.onrender.com/uploads/Picture 1";
-      const expectedAlt = "Post";
-      render(
-        <BrowserRouter>
-          <Provider store={store}>
-            <PostDetails post={mockPosts[1]} />
-          </Provider>
-        </BrowserRouter>
-      );
+    describe("When its invoked and the id of the user owner of the post matches with the id of the user logged", () => {
+      test("Then it should render a button 'Edit' and call dispatch when clicked", () => {
+        const expectedButton = "Edit";
+        render(
+          <BrowserRouter>
+            <Provider store={store}>
+              <PostDetails post={mockPosts[0]} />
+            </Provider>
+          </BrowserRouter>
+        );
 
-      const image = screen.getByRole("img", { name: expectedAlt });
+        const editButton = screen.getByRole("button", { name: expectedButton });
+        userEvent.click(editButton);
 
-      expect(image).toHaveAttribute("src", expectedImage);
-    });
-  });
-
-  describe("When its invoked and the id of the user owner of the post matches with the id of the user logged", () => {
-    test("Then it should render a button 'Edit' and call dispatch when clicked", () => {
-      const expectedButton = "Edit";
-      render(
-        <BrowserRouter>
-          <Provider store={store}>
-            <PostDetails post={mockPosts[0]} />
-          </Provider>
-        </BrowserRouter>
-      );
-
-      const editButton = screen.getByRole("button", { name: expectedButton });
-      userEvent.click(editButton);
-
-      expect(mockNavigate).toHaveBeenCalled();
+        expect(mockNavigate).toHaveBeenCalled();
+      });
     });
 
     test("Then it should render a button 'Delete' and call dispatch when clicked", () => {

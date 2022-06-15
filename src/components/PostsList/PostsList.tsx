@@ -8,9 +8,9 @@ interface Props {
 const PostsList = (props: Props): JSX.Element => {
   return (
     <>
-      <ul>
+      <ul className="flex flex-col">
         {props.posts.map((post: IPost) => (
-          <li key={post.id}>
+          <li className="flex justify-center" key={post.id}>
             <Post post={post} />
           </li>
         ))}

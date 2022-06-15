@@ -15,6 +15,7 @@ import { UserData } from "./types/UserTypes";
 import { loginActionCreator } from "./redux/features/userSlice/userSlice";
 import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import Loading from "./components/Loading/Loading";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -35,17 +36,19 @@ function App() {
     <>
       <Modal />
       <CredentialsValidation>
-        <Routes>
-          <Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/register" element={<RegisterPage />}></Route>
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/my-profile" element={<ProfilePage />} />
-          <Route path="/add-post" element={<AddPostPage />} />
-          <Route path="/post/:id" element={<DetailPostPage />} />
-          <Route path="/post/edit/:postId" element={<EditPostPage />} />
-          <Route path="/settings" element={<SettingsPage />} />
-          <Route path="/" element={<Navigate to="/home" />} />
-        </Routes>
+        <ScrollToTop>
+          <Routes>
+            <Route path="/login" element={<LoginPage />}></Route>
+            <Route path="/register" element={<RegisterPage />}></Route>
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/my-profile" element={<ProfilePage />} />
+            <Route path="/add-post" element={<AddPostPage />} />
+            <Route path="/post/:id" element={<DetailPostPage />} />
+            <Route path="/post/edit/:postId" element={<EditPostPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/" element={<Navigate to="/home" />} />
+          </Routes>
+        </ScrollToTop>
       </CredentialsValidation>
       <Navigation />
       <Loading />

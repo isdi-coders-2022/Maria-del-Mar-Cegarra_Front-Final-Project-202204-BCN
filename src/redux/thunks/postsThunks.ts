@@ -1,15 +1,15 @@
 import axios from "axios";
 import { IPost } from "../../types/PostTypes";
 import {
+  notShowLoadingActionCreator,
+  showLoadingActionCreator,
+} from "../features/loadingSlice/loadingSlice";
+import {
   createPostActionCreator,
   deletePostActionCreator,
   loadPublicPostsActionCreator,
   loadUserPostsActionCreator,
 } from "../features/postsSlice/postsSlice";
-import {
-  closeUIActionCreator,
-  showLoadingActionCreator,
-} from "../features/UISlice/UISlice";
 
 import { AppDispatch } from "../store/store";
 import { showAdviseThunk, showErrorThunk } from "./UIThunks";
@@ -65,7 +65,7 @@ export const loadPublicPostsThunk =
         return;
       }
       dispatch(loadPublicPostsActionCreator(data.posts));
-      dispatch(closeUIActionCreator());
+      dispatch(notShowLoadingActionCreator());
     } catch (error) {
       dispatch(showErrorLoadPublicPosts);
     }
@@ -92,7 +92,7 @@ export const loadUserPostsThunk =
         return;
       }
       dispatch(loadUserPostsActionCreator(data.posts));
-      dispatch(closeUIActionCreator());
+      dispatch(notShowLoadingActionCreator());
     } catch (error) {
       dispatch(showErrorLoadPublicPosts);
     }

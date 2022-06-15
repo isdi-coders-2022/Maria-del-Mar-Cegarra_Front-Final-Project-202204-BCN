@@ -36,7 +36,7 @@ const Post = ({
   const apiUrl = process.env.REACT_APP_API_URL;
 
   return (
-    <div className=" rounded overflow-hidden border w-screen lg:w-6/12 md:w-6/12 bg-violet-200 my-8">
+    <div className="transition-all rounded overflow-hidden border w-screen lg:w-8/12 md:w-10/12 bg-violet-200 my-8">
       <div className="w-full flex justify-between p-3">
         <div className="flex">
           <div className="rounded-full h-16 w-16 bg-gray-500 flex items-center justify-center overflow-hidden">

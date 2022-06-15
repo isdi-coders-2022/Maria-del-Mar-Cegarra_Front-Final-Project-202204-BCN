@@ -13,6 +13,8 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import { useAppDispatch } from "./redux/hooks/hooks";
 import { UserData } from "./types/UserTypes";
 import { loginActionCreator } from "./redux/features/userSlice/userSlice";
+import SettingsPage from "./pages/SettingsPage/SettingsPage";
+import Loading from "./components/Loading/Loading";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -41,10 +43,12 @@ function App() {
           <Route path="/add-post" element={<AddPostPage />} />
           <Route path="/post/:id" element={<DetailPostPage />} />
           <Route path="/post/edit/:postId" element={<EditPostPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
           <Route path="/" element={<Navigate to="/home" />} />
         </Routes>
       </CredentialsValidation>
       <Navigation />
+      <Loading />
     </>
   );
 }

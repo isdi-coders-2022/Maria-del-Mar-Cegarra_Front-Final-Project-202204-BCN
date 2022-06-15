@@ -7,11 +7,9 @@ import {
   UserState,
 } from "../../types/UserTypes";
 import { showAdviseThunk, showErrorThunk } from "./UIThunks";
-import {
-  closeUIActionCreator,
-  showLoadingActionCreator,
-} from "../features/UISlice/UISlice";
+import { closeUIActionCreator } from "../features/UISlice/UISlice";
 import { loginActionCreator } from "../features/userSlice/userSlice";
+import { showLoadingActionCreator } from "../features/loadingSlice/loadingSlice";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 

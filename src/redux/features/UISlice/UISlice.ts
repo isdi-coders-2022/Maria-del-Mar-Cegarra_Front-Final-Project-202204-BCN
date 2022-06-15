@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store/store";
 
-type Modal = "" | "error" | "advise" | "confirmation" | "loading";
+type Modal = "" | "error" | "advise" | "confirmation";
 
 export interface UIState {
   type: Modal;
@@ -38,7 +38,6 @@ export const uiSlice = createSlice({
       ...action.payload,
       type: "confirmation",
     }),
-    showLoading: (ui) => ({ ...initialUI, type: "loading" }),
     closeUI: (ui) => ({ ...initialUI }),
   },
 });
@@ -47,7 +46,6 @@ export const {
   showError: showErrorActionCreator,
   showAdvise: showAdviseActionCreator,
   showConfirmation: showConfirmationActionCreator,
-  showLoading: showLoadingActionCreator,
   closeUI: closeUIActionCreator,
 } = uiSlice.actions;
 

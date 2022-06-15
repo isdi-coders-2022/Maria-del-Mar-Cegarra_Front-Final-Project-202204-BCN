@@ -18,17 +18,27 @@ const prettifyDate = (date: string) => {
     "december",
   ];
   const month = parseInt(dateDivided[1]);
-  const postDate =
-    timeDiff / 1000 <= 60
-      ? `${Math.round(timeDiff / 1000)} seconds ago`
-      : timeDiff / 1000 / 60 <= 60
-      ? `${Math.round(timeDiff / 1000 / 60)} minutes ago`
-      : timeDiff / 1000 / 60 / 60 <= 23
-      ? `${Math.round(timeDiff / 1000 / 60 / 60)} hours ago`
-      : timeDiff / 1000 / 60 / 60 / 24 <= 7
-      ? `${Math.round(timeDiff / 1000 / 60 / 60 / 24)} days ago`
-      : `${dateDivided[2]} of ${months[month]} of ${dateDivided[0]}`;
-  return postDate;
+  const seconds = timeDiff / 1000;
+  const minutes = timeDiff / 1000 / 60;
+  const hours = timeDiff / 1000 / 60 / 60;
+  const days = timeDiff / 1000 / 60 / 60 / 24;
+  const secondsPretty = `${Math.round(seconds)} seconds ago`;
+  const minutesPretty = `${Math.round(minutes)} minutes ago`;
+  const hoursPretty = `${Math.round(hours)} hours ago`;
+  const daysPretty = `${Math.round(days)} days ago`;
+  const datePretty = `${dateDivided[2]} of ${months[month]} of ${dateDivided[0]}`;
+
+  if (seconds < 60) {
+    return secondsPretty;
+  } else if (minutes < 60) {
+    return minutesPretty;
+  } else if (hours < 24) {
+    return hoursPretty;
+  } else if (days < 7) {
+    return daysPretty;
+  } else {
+    return datePretty;
+  }
 };
 
 export default prettifyDate;

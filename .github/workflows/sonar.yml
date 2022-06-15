@@ -15,6 +15,8 @@ jobs:
         run: npm ci
       - name: Testing coverage
         run: npm run test-coverage
+        env:
+          REACT_APP_API_URL: ${{secrets.REACT_APP_API_URL}}
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:

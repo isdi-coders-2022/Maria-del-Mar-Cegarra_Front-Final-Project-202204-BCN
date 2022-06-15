@@ -1,6 +1,5 @@
 import { mockPosts } from "../../../mocks/postMocks";
 import { RootState } from "../../store/store";
-import { editUserActionCreator } from "../userSlice/userSlice";
 import postsSlice, {
   selectPost,
   createPostActionCreator,

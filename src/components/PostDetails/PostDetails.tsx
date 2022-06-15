@@ -46,13 +46,7 @@ const PostDetails = ({
             <div className="flex my-2">
               <div className="rounded-full h-16 w-16 bg-gray-500 flex items-center justify-center overflow-hidden">
                 <img
-                  src={`${apiUrl}uploads/${profilePic}`}
-                  onError={(error: any) => {
-                    let backupSrc = profilePicBackup ? profilePicBackup : "";
-                    (error.target as HTMLImageElement).onerror = null;
-                    (error.target as HTMLImageElement).src =
-                      backupSrc as string;
-                  }}
+                  src={`${apiUrl}uploads/${profilePicBackup}`}
                   alt="profilepic"
                 />
               </div>
@@ -64,13 +58,7 @@ const PostDetails = ({
             <div className="w-full shadow-md rounded-2xl relative">
               <div className="w-full relative rounded-2xl">
                 <img
-                  src={`${apiUrl}uploads/${picture}`}
-                  onError={(error: any) => {
-                    let backupSrc = pictureBackup ? pictureBackup : "";
-                    (error.target as HTMLImageElement).onerror = null;
-                    (error.target as HTMLImageElement).src =
-                      backupSrc as string;
-                  }}
+                  src={`${apiUrl}uploads/${pictureBackup}`}
                   alt="Post"
                   className=" rounded-2xl"
                 />

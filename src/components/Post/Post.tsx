@@ -41,12 +41,7 @@ const Post = ({
         <div className="flex">
           <div className="rounded-full h-16 w-16 bg-gray-500 flex items-center justify-center overflow-hidden">
             <img
-              src={`${apiUrl}uploads/${profilePic}`}
-              onError={(error: any) => {
-                let backupSrc = profilePicBackup ? profilePicBackup : "";
-                (error.target as HTMLImageElement).onerror = null;
-                (error.target as HTMLImageElement).src = backupSrc as string;
-              }}
+              src={`${apiUrl}uploads/${profilePicBackup}`}
               alt="profilepic"
             />
           </div>
@@ -71,12 +66,7 @@ const Post = ({
         onClick={goToDetails}
         className="w-full bg-cover"
         alt={caption}
-        src={`${apiUrl}uploads/${picture}`}
-        onError={(error: any) => {
-          let backupSrc = pictureBackup ? pictureBackup : "";
-          (error.target as HTMLImageElement).onerror = null;
-          (error.target as HTMLImageElement).src = backupSrc as string;
-        }}
+        src={`${apiUrl}uploads/${pictureBackup}`}
       />
       <div className="px-3 pb-2">
         <div className="pt-2">

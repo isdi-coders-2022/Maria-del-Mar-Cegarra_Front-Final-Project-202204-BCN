@@ -44,7 +44,7 @@ describe("Given the DetailPost component", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <PostDetails post={mockPosts[0]} />
+            <PostDetails post={mockPosts[1]} />
           </Provider>
         </BrowserRouter>
       );

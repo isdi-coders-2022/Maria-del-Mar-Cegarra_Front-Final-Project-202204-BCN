@@ -1,11 +1,11 @@
 import { RootState } from "../../store/store";
+import { showLoadingActionCreator } from "../loadingSlice/loadingSlice";
 import UISlice, {
   closeUIActionCreator,
   selectUI,
   showAdviseActionCreator,
   showConfirmationActionCreator,
   showErrorActionCreator,
-  showLoadingActionCreator,
   UIState,
 } from "./UISlice";
 
@@ -191,6 +191,7 @@ describe("Given the selectPost function", () => {
           publicPostsPage: 1,
           userPostsPage: 1,
         },
+        loading: false,
       };
 
       const uiState = selectUI(state);

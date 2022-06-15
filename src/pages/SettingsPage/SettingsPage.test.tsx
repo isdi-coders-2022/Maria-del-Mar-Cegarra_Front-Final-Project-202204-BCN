@@ -35,7 +35,6 @@ describe("Given the SettingsPage component", () => {
     });
 
     test("Then it should call dispatch with logOutActionCreator and remove token from localStorage", () => {
-      const dispatch = jest.fn();
       const expectedAction = logOutActionCreator();
       const expectedButton = "Log Out";
       render(

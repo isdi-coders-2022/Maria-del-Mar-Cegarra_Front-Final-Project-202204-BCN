@@ -4,11 +4,6 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { mockPosts } from "../../mocks/postMocks";
 import { store } from "../../redux/store/store";
-import { deletePostThunk } from "../../redux/thunks/postsThunks";
-import {
-  showConfirmationDeletePost,
-  showConfirmationThunk,
-} from "../../redux/thunks/UIThunks";
 import PostDetails from "./PostDetails";
 
 const mockDispatch = jest.fn();

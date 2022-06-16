@@ -12,8 +12,7 @@ interface Props {
 const Post = ({
   post: {
     id,
-    user: { name, username, profilePic, profilePicBackup },
-    picture,
+    user: { name, username },
     date,
     pictureBackup,
     caption,

@@ -1,5 +1,4 @@
 import { RootState } from "../../store/store";
-import { showLoadingActionCreator } from "../loadingSlice/loadingSlice";
 import UISlice, {
   closeUIActionCreator,
   selectUI,

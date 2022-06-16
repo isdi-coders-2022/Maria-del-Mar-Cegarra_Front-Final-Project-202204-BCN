@@ -86,7 +86,7 @@ const RegisterForm = (): JSX.Element => {
   return (
     <>
       <div className="max-w-screen-xl px-4 py-16 mx-auto sm:px-6 lg:px-8">
-        <div className="max-w-lg mx-auto">
+        <div className="backdrop-blur-md max-w-lg mx-auto">
           <form
             action="register"
             onSubmit={submitFormData}
@@ -131,7 +131,7 @@ const RegisterForm = (): JSX.Element => {
               Sign up
             </button>
 
-            <p className="text-sm text-center text-gray-500">
+            <p className="text-lg text-center font-medium text-gray-800">
               Already have an account?
               <a className="underline" href="/login">
                 Log in

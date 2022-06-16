@@ -97,7 +97,7 @@ const PostForm = ({ postId }: Props): JSX.Element => {
   return (
     <>
       <form
-        className="w-full max-w-lg rounded-md bg-violet-200 m-auto py-10 mt-10 px-10 border"
+        className="w-full max-w-lg rounded-md bg-violet-200 py-10 m-auto mt-10 mb-30 px-10 border"
         action="add/edit post"
         noValidate
         autoComplete="off"

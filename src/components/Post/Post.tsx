@@ -12,8 +12,7 @@ interface Props {
 const Post = ({
   post: {
     id,
-    user: { name, username, profilePic, profilePicBackup },
-    picture,
+    user: { name, username },
     date,
     pictureBackup,
     caption,
@@ -38,7 +37,12 @@ const Post = ({
       <div className="w-full flex justify-between p-3">
         <div className="flex">
           <div className="rounded-full h-16 w-16 bg-gray-500 flex items-center justify-center overflow-hidden">
-            <img src="/images/profilePic.png" alt="profilepic" />
+            <img
+              height="64px"
+              width="64px"
+              src="/images/profilePic.png"
+              alt="profilepic"
+            />
           </div>
           <span className="py-3 ml-5 font-bold text-2xl">{name}</span>
         </div>
@@ -76,7 +80,7 @@ const Post = ({
             {caption}
           </div>
         </div>
-        <div className="text-md mb-2 text-gray-400 cursor-pointer font-medium">
+        <div className="text-md mb-2 text-gray-700 cursor-pointer font-medium">
           View all {comments} comments
         </div>
       </div>

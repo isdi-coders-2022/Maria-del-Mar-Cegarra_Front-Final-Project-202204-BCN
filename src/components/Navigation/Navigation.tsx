@@ -44,7 +44,7 @@ const Navigation = (): JSX.Element => {
   return (
     <div className="flex relative items-center justify-center">
       <div className="flex flex-col">
-        <div className="fixed bottom-0 left-0 right-0 px-5 pt-2 bg-violet-500 opacity-90 shadow-lg rounded-2xl w-screen">
+        <div className="fixed bottom-0 left-0 right-0 px-5 pt-0 bg-violet-500 opacity-90 shadow-lg rounded-2xl w-screen">
           <ul className="flex flex-row space-x-3 justify-evenly">
             {navlinks.map((navlink) => (
               <li key={navlink.text} className="flex group">
